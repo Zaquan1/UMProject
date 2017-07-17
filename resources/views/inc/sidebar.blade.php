@@ -20,6 +20,51 @@
             <span>Add User</span>
           </a>
         @endif
+
+        @if(Auth::user()->role == "lecturer")
+          <li class="header">LECTURER NAVIGATION</li>  
+          <li class="active treeview">
+            <a href="#">
+              <i class="fa fa-user"></i> <span>Mentee</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              @if(count($data['user']->mm_assignments) > 0)
+                @foreach($data['user']->mm_assignments as $assignment)
+                  <li>
+                    <a href="/students/{{ $assignment->students->id }}">
+                      <i class="fa fa-circle-o"></i>{{ $assignment->students->name }}
+                    </a>
+                  </li>
+                @endforeach
+              @endif
+            </ul>
+          </li>
+        @endif
+
+        @if(Auth::user()->role == "student")
+          <li class="header">STUDENT NAVIGATION</li>  
+          <li class="active treeview">
+            <a href="#">
+              <i class="fa fa-user"></i> <span>Mentor</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              @if(count($data['user']->mm_assignments) > 0)
+                <li>
+                  <a href="/lecturers/{{ $data['user']->mm_assignments->lecturers->id }}">
+                    <i class="fa fa-circle-o"></i>{{ $data['user']->mm_assignments->lecturers->name }}
+                  </a>
+                </li>
+              @endif
+            </ul>
+          </li>
+        @endif
+        <!--
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
           <a href="#">
@@ -92,6 +137,7 @@
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        -->
       </ul>
     </section>
     <!-- /.sidebar -->

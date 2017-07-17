@@ -26,7 +26,19 @@ class DashboardController extends Controller
     public function index()
     {
         $title = "Dashboard";
-        return view('pages.dashboard')->with('title', $title);
+        $data['title'] = $title;
+        if (\Auth::user()->role == "lecturer")
+        {
+            $user = \Auth::user()->lecturer()->with('mm_assignments.students')->get();
+            $route = 'pages.lecturer_dashboard';
+        }
+        elseif(\Auth::user()->role == "student")
+        {
+            $user = \Auth::user()->student()->with('mm_assignments.lecturers')->get();
+            $route = 'pages.student_dashboard';
+        }
+        $data['user'] = $user[0];
+        return view($route)->with('data', $data);
     }
 
     public function test()

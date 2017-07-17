@@ -11,7 +11,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                 <h1>
-                    {{ $title }}
+                    {{ $data['title'] }}
                     <small>Control panel</small>
                 </h1>
                 </section>
