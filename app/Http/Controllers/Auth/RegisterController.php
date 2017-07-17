@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'role' => 'required|string'
         ]);
     }
 
@@ -62,11 +63,20 @@ class RegisterController extends Controller
 {
     $this->validator($request->all())->validate();
 
-    event(new Registered($user = $this->create($request->all())));
-
+    //event(new Registered($user = $this->create($request->all())));
     //The auto login code has been removed from here.
+    $user = $this->create($request->all());
+    if($request->input('role') == "lecturer")
+        return redirect()->action('LecturersController@create')
+            ->with('user', $request->all())
+            ->with('id', $user->id);
 
-    return redirect($this->redirectPath());
+    elseif($request->input('role') == "student")
+        return redirect()->action('StudentsController@create')
+            ->with('user', $request->all())
+            ->with('id', $user->id);
+
+    return rederect('/');
 }
 
     /**
@@ -81,13 +91,17 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]); 
+            'role' => $data['role']
+        ]);
+        /*
         $student = new students;
         $student->name = $user->name;
         $student->email = $user->email;
         $student->cohort_id = 2;
         $student->metrix = "test";
         $user->student()->save($student);
+        */
+        
         return $user;
     }
 }

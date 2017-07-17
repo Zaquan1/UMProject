@@ -15,6 +15,7 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->user = \Auth::User();
     }
 
     /**
@@ -30,6 +31,7 @@ class DashboardController extends Controller
 
     public function test()
     {
+        /*
         $assign = new mm_assignments;
         $student = new students;
         $student->name = "testSubject1";
@@ -37,6 +39,10 @@ class DashboardController extends Controller
         $cstudent = students::create($student);
         $cstudent->mm_assignments()->save($assign);
         //$test = \Auth::user()->password;
-        return redirect('/dashboard'); 
+        return redirect('/dashboard');
+
+        */
+        //$test = $this->user->all();
+        return \Auth::user()->name;//$this->user->name;
     }
 }

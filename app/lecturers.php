@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class lecturers extends Model
 {
     protected $table = "lecturers";
+    public $timestamps = false;
 
     public function mm_assignments()
     {

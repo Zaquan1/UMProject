@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return redirect('/dashboard');
     }
+
+    public function test()
+    {
+        return view('reference_exp');
+    }
 }

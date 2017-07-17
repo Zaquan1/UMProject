@@ -12,6 +12,14 @@
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
+        @if(Auth::user()->role == "admin")
+          <li class="header">ADMIN NAVIGATION</li>  
+          <li class="treeview">
+          <a href="/register">
+            <i class="fa fa-user-plus"></i>
+            <span>Add User</span>
+          </a>
+        @endif
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
           <a href="#">
