@@ -1,7 +1,38 @@
 @extends('layouts.app')
 
 @section('content-app')
-    <h1>Welcome to Laravel Test Project</h1>
-    <p>this is just a test project to get familiar with how laravel work</p>
-    <p><a href="/dashboard/test">test</a></p>
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+            <a href="/dashboard/students" class="small-box">
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{ count($data['lecturers']) }}</h3>
+
+                        <p>Lecturers</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <div class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+            <a href="/dashboard/lecturers" class="small-box">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{ count($data['students']) }}</h3>
+
+                        <p>Students</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-mortar-board"></i>
+                    </div>
+                    <div class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></div>
+                </div>
+            </a>
+        </div>
+    </div>
 @endsection

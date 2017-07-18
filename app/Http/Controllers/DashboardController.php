@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\students;
-use App\mm_assignments;
 
 class DashboardController extends Controller
 {
@@ -27,17 +25,27 @@ class DashboardController extends Controller
     {
         $title = "Dashboard";
         $data['title'] = $title;
-        if (\Auth::user()->role == "lecturer")
+
+        if(\Auth::user()->role == "admin")
         {
-            $user = \Auth::user()->lecturer()->with('mm_assignments.students')->get();
-            $route = 'pages.lecturer_dashboard';
+            $data['lecturers'] = \Auth::user()->where('role', 'lecturer')->with('lecturer.mm_assignments')->get();
+            $data['students'] = \Auth::user()->where('role', 'student')->with('student.mm_assignments')->get();
+            $route = 'pages.admin_dashboard';
         }
-        elseif(\Auth::user()->role == "student")
+        else
         {
-            $user = \Auth::user()->student()->with('mm_assignments.lecturers')->get();
-            $route = 'pages.student_dashboard';
+            if (\Auth::user()->role == "lecturer")
+            {
+                $user = \Auth::user()->lecturer()->with('mm_assignments.students')->get();
+                $route = 'pages.lecturer_dashboard';
+            }
+            elseif(\Auth::user()->role == "student")
+            {
+                $user = \Auth::user()->student()->with('mm_assignments.lecturers')->get();
+                $route = 'pages.student_dashboard';
+            }
+            $data['user'] = $user[0];
         }
-        $data['user'] = $user[0];
         return view($route)->with('data', $data);
     }
 

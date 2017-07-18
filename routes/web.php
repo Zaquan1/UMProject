@@ -23,9 +23,9 @@ Route::get('/dashboard/test', 'DashboardController@test');
 
 Route::get('/refer', 'HomeController@test');
 
-Route::resource('lecturers', 'LecturersController');
+Route::resource('dashboard/lecturers', 'LecturersController');
 
-Route::resource('students', 'StudentsController');
+Route::resource('dashboard/students', 'StudentsController');
 
 //Route::get('lecturers/create/{id}', 'LecturersController@create');
 //Route::get('lecturers/create', 'LecturersController@create');

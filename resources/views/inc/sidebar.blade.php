@@ -15,10 +15,31 @@
         @if(Auth::user()->role == "admin")
           <li class="header">ADMIN NAVIGATION</li>  
           <li class="treeview">
-          <a href="/register">
-            <i class="fa fa-user-plus"></i>
-            <span>Add User</span>
-          </a>
+            <a href="/register">
+              <i class="fa fa-user-plus"></i>
+              <span>Add User</span>
+            </a>
+          </li>
+          <li class="treeview">
+            <a href="/dashboard/lecturers">
+              <i class="fa fa-users"></i>
+              <span>Lecturers</span>
+            </a>
+          </li>
+          <li class="treeview">
+            <a href="/dashboard/students">
+              <i class="fa fa-users"></i>
+              <span>Students</span>
+            </a>
+          </li>
+          <li class="header">RELATIONSHIP</li>
+          <li class="treeview">
+            <a href="/dashboard/mm_assignments">
+              <i class="fa fa-male"></i><i class="fa fa-male"></i>
+              <span>Mentor-Mentee</span>
+            </a>
+          </li>
+
         @endif
 
         @if(Auth::user()->role == "lecturer")
@@ -34,7 +55,7 @@
               @if(count($data['user']->mm_assignments) > 0)
                 @foreach($data['user']->mm_assignments as $assignment)
                   <li>
-                    <a href="/students/{{ $assignment->students->id }}">
+                    <a href="/dashboard/students/{{ $assignment->students->id }}">
                       <i class="fa fa-circle-o"></i>{{ $assignment->students->name }}
                     </a>
                   </li>
@@ -56,7 +77,7 @@
             <ul class="treeview-menu">
               @if(count($data['user']->mm_assignments) > 0)
                 <li>
-                  <a href="/lecturers/{{ $data['user']->mm_assignments->lecturers->id }}">
+                  <a href="/dashboard/lecturers/{{ $data['user']->mm_assignments->lecturers->id }}">
                     <i class="fa fa-circle-o"></i>{{ $data['user']->mm_assignments->lecturers->name }}
                   </a>
                 </li>
