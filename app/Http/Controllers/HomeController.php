@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\RoleServices as Roles;
 
 class HomeController extends Controller
 {
@@ -11,9 +12,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Roles $role)
     {
         $this->middleware('auth');
+        $this->role = $role;
+        $this->title = "Home";
     }
 
     /**
@@ -26,8 +29,15 @@ class HomeController extends Controller
         return redirect('/dashboard');
     }
 
-    public function test()
+    public function refer()
     {
         return view('reference_exp');
+    }
+
+    public function test()
+    {
+        $data = $this->role->getRole();
+        $data['title'] = $this->title;
+        return view('mm_assignments.index')->with('data', $data);
     }
 }

@@ -16,11 +16,7 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
         $this->role = $role;
-    }
-
-    private function getRole()
-    {
-        //$this->data = $this->role->getRole();
+        $this->title = "Dashboard";
     }
 
     /**
@@ -30,14 +26,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $title = "Dashboard";
         $data = $this->role->getRole();
-        $data['title'] = $title;
-
+        $data['title'] = $this->title;
         if(\Auth::user()->role == "admin")          { $route = 'pages.admin_dashboard'; }
         elseif (\Auth::user()->role == "lecturer")  { $route = 'pages.lecturer_dashboard'; }
         elseif(\Auth::user()->role == "student")    { $route = 'pages.student_dashboard'; }
-        
+
         return view($route)->with('data', $data);
     }
 

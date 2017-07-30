@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\mm_assignments;
 use Session;
+use App\Services\RoleServices as Roles;
 
 class Mm_assignmentsController extends Controller
 {
+
+    public function __construct(Roles $role)
+    {
+        $this->middleware('auth');
+        $this->role = $role;
+        $this->title = "Dashboard > Mentor Mentee";
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +24,12 @@ class Mm_assignmentsController extends Controller
      */
     public function index()
     {
-        $assignment = mm_assignments::all();
-        return view('mm_assignments.index')->with('assignments', $assignment);
+        $data = $this->role->getRole();
+        $data['title'] = $this->title;
+        $data['assignments'] = mm_assignments::with(['lecturers', 'students'])
+            ->orderBy(\DB::raw('-mentor_id'))->get();
+        //return $data;
+        return view('mm_assignments.index')->with('data', $data);
     }
 
     /**
@@ -26,7 +39,11 @@ class Mm_assignmentsController extends Controller
      */
     public function create()
     {
-    
+        $id = Session::get('id');
+        $assignment = new mm_assignments;
+        $assignment->mentee_id = $id;
+        $assignment->save();
+        return redirect('/register');
     }
 
     /**

@@ -21,12 +21,15 @@ Auth::routes();
 
 Route::get('/dashboard/test', 'DashboardController@test');
 
-Route::get('/refer', 'HomeController@test');
-
 Route::resource('dashboard/lecturers', 'LecturersController');
 
 Route::resource('dashboard/students', 'StudentsController');
 
+Route::resource('dashboard/mentor_mentee', 'Mm_assignmentsController');
+
 //Route::get('lecturers/create/{id}', 'LecturersController@create');
 //Route::get('lecturers/create', 'LecturersController@create');
 
+Route::get('/refer', 'HomeController@refer');
+
+Route::get('/test', 'HomeController@test');

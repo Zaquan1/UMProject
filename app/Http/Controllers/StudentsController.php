@@ -32,9 +32,9 @@ class StudentsController extends Controller
         $student->name = $user['name'];
         $student->email = $user['email'];
         $student->save();
-        /*
-        */
-        return redirect('/register');//$request->input('name');//redirect('/');
+        return redirect()->action('Mm_assignmentsController@create')
+            ->with('id', $student->id);
+        //return redirect('/register');//$request->input('name');//redirect('/');
     }
 
     /**

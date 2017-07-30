@@ -34,7 +34,7 @@
           </li>
           <li class="header">RELATIONSHIP</li>
           <li class="treeview">
-            <a href="/dashboard/mm_assignments">
+            <a href="/dashboard/mentor_mentee">
               <i class="fa fa-male"></i><i class="fa fa-male"></i>
               <span>Mentor-Mentee</span>
             </a>
