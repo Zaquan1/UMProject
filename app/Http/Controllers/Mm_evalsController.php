@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\mm_assignments;
+use App\mm_evals;
 use Session;
 use App\Services\RoleServices as Roles;
-use Yajra\Datatables\Datatables;
 
-class Mm_assignmentsController extends Controller
+class Mm_evalsController extends Controller
 {
 
     public function __construct(Roles $role)
     {
         $this->middleware('auth');
         $this->role = $role;
-        $this->title = "Dashboard > Mentor Mentee";
+        $this->title = "Dashboard > Mentor Mentee > Evaluation";
     }
 
     /**
@@ -27,10 +26,7 @@ class Mm_assignmentsController extends Controller
     {
         $data = $this->role->getRole();
         $data['title'] = $this->title;
-        $data['assignments'] = mm_assignments::with(['lecturers', 'students', 'mm_evals'])
-            ->orderBy(\DB::raw('-mentor_id'))->paginate(15); 
-        //return $data;
-        return view('mentor_mentee.mm_assignments.index')->with('data', $data);
+        return view('mentor_mentee.mm_evals.index')->with('data', $data);
     }
 
     /**
@@ -40,11 +36,6 @@ class Mm_assignmentsController extends Controller
      */
     public function create()
     {
-        $id = Session::get('id');
-        $assignment = new mm_assignments;
-        $assignment->mentee_id = $id;
-        $assignment->save();
-        return redirect('/register');
     }
 
     /**
@@ -101,9 +92,5 @@ class Mm_assignmentsController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function anyData()
-    {
-        return Datatables::of(mm_assignments::query())->make(true);
     }
 }

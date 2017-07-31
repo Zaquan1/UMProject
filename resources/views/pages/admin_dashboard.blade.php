@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-            <a href="/dashboard/students" class="small-box">
+            <a href="{{ route('lecturers.index') }}" class="small-box">
                 <div class="small-box bg-aqua">
                     <div class="inner">
                         <h3>{{ count($data['lecturers']) }}</h3>
@@ -20,7 +20,7 @@
         </div>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-            <a href="/dashboard/lecturers" class="small-box">
+            <a href="{{ route('students.index') }}" class="small-box">
                 <div class="small-box bg-green">
                     <div class="inner">
                         <h3>{{ count($data['students']) }}</h3>

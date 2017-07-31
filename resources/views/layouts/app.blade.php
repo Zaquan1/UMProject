@@ -23,6 +23,8 @@
         
         <!-- Script -->
         <div>
+                <!-- DataTables -->
+                <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
                 <!-- jQuery 2.2.3 -->
                 <script src="{{ URL::asset('plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
                 <!-- jQuery UI 1.11.4 -->
@@ -56,6 +58,8 @@
                 <script src="{{ URL::asset('plugins/fastclick/fastclick.js') }}"></script>
                 <!-- AdminLTE App -->
                 <script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
+                <!-- App scripts -->
+                @yield('script')
         </div>
     </body>
 @endsection

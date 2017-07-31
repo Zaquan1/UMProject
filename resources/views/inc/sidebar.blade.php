@@ -15,26 +15,26 @@
         @if(Auth::user()->role == "admin")
           <li class="header">ADMIN NAVIGATION</li>  
           <li class="treeview">
-            <a href="/register">
+            <a href="{{ route('register') }}">
               <i class="fa fa-user-plus"></i>
               <span>Add User</span>
             </a>
           </li>
           <li class="treeview">
-            <a href="/dashboard/lecturers">
+            <a href="{{ route('lecturers.index') }}">
               <i class="fa fa-users"></i>
               <span>Lecturers</span>
             </a>
           </li>
           <li class="treeview">
-            <a href="/dashboard/students">
+            <a href="{{ route('students.index') }}">
               <i class="fa fa-users"></i>
               <span>Students</span>
             </a>
           </li>
           <li class="header">RELATIONSHIP</li>
           <li class="treeview">
-            <a href="/dashboard/mentor_mentee">
+            <a href="{{ route('mentor_mentee.index') }}">
               <i class="fa fa-male"></i><i class="fa fa-male"></i>
               <span>Mentor-Mentee</span>
             </a>
@@ -55,7 +55,7 @@
               @if(count($data['user']->mm_assignments) > 0)
                 @foreach($data['user']->mm_assignments as $assignment)
                   <li>
-                    <a href="/dashboard/students/{{ $assignment->students->id }}">
+                    <a href="{{ route('students.show', $assignment->students->id) }}">
                       <i class="fa fa-circle-o"></i>{{ $assignment->students->name }}
                     </a>
                   </li>
@@ -77,7 +77,7 @@
             <ul class="treeview-menu">
               @if(count($data['user']->mm_assignments) > 0)
                 <li>
-                  <a href="/dashboard/lecturers/{{ $data['user']->mm_assignments->lecturers->id }}">
+                  <a href="{{ route('lecturers.show', $data['user']->mm_assignments->lecturers->id) }}">
                     <i class="fa fa-circle-o"></i>{{ $data['user']->mm_assignments->lecturers->name }}
                   </a>
                 </li>

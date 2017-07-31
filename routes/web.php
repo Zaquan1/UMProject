@@ -25,7 +25,14 @@ Route::resource('dashboard/lecturers', 'LecturersController');
 
 Route::resource('dashboard/students', 'StudentsController');
 
+Route::resource('dashboard/mentor_mentee/evaluation', 'Mm_evalsController');
+
+Route::get('dashboard/mentor_mentee/search', ['as'=>'mentor_mentee.data', 'uses' =>'Mm_assignmentsController@anyData']);
+
 Route::resource('dashboard/mentor_mentee', 'Mm_assignmentsController');
+
+
+//Route::resource('dashboard/mentor_mentee', 'Mm_assignmentsController');
 
 //Route::get('lecturers/create/{id}', 'LecturersController@create');
 //Route::get('lecturers/create', 'LecturersController@create');
