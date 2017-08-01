@@ -3,12 +3,13 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2017 at 07:02 AM
+-- Generation Time: Aug 01, 2017 at 04:59 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
 
 --
 -- Database: `prahamy_merdu`
@@ -76,12 +77,8 @@ CREATE TABLE `lecturers` (
 --
 
 INSERT INTO `lecturers` (`id`, `department_id`, `name`, `email`, `designation`, `status`, `user_id`) VALUES
-(1, 2, 'Meow cat cat', '', '', 1, 0),
-(2, 3, 'Mr Octo', '', '', 2, 0),
-(3, NULL, 'testlecturer', 'testlecturer@yahoo.com', NULL, NULL, 57),
-(4, NULL, 'testlecturer3', 'test3@yahoo.com', NULL, NULL, 65),
-(5, NULL, 'lect1', 'lect1@yahoo.com', NULL, NULL, 66),
-(6, NULL, 'lect2', 'lect2@yahoo.com', NULL, NULL, 70);
+(5, 2, 'lect1', 'lect1@yahoo.com', NULL, NULL, 66),
+(6, 1, 'lect2', 'lect2@yahoo.com', NULL, NULL, 70);
 
 -- --------------------------------------------------------
 
@@ -138,9 +135,10 @@ CREATE TABLE `mm_assignments` (
 --
 
 INSERT INTO `mm_assignments` (`id`, `mentor_id`, `mentee_id`) VALUES
-(1, 1, 1),
-(2, 2, 2),
-(5, 5, 6);
+(5, 5, 6),
+(6, NULL, 9),
+(7, NULL, 7),
+(8, NULL, 8);
 
 -- --------------------------------------------------------
 
@@ -174,13 +172,10 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `cohort_id`, `name`, `metrix`, `email`, `user_id`) VALUES
-(1, 1, 'Kabustin', 'currently', 'k@yahoo.com', 0),
-(2, 2, 'igumi nanoyo', 'idunotknow', 'in@gmail.com', 0),
-(3, 1, 'mr berkauskhi', '', 'kaushi.email.nottingham.edu.my', 0),
-(4, 2, 'muahmuhamuah', 'test', 'catfish@yahoo.com', 4),
-(5, 2, 'registe test 2', 'test', 'te@test.com', 5),
-(6, NULL, 'stud1', NULL, 'stud@yahoo.com', 69),
-(7, NULL, 'stud2', NULL, 'stud2@yahoo.com', 71);
+(6, 1, 'stud1', NULL, 'stud@yahoo.com', 69),
+(7, 2, 'stud2', NULL, 'stud2@yahoo.com', 71),
+(8, 1, 'stud3', NULL, 'stud3@yahoo.com', 72),
+(9, 2, 'stud4', NULL, 'stud4@yahoo.com', 73);
 
 -- --------------------------------------------------------
 
@@ -204,11 +199,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@yahoo.com', '$2y$10$atikM2L3Pl5s2gjP1OQFT.a6poyJyk8Sto8SoAEmyKJONz9Jz0HwS', 'admin', 'IimVP9rbji2GQaeXCauHRUNpHcRAkSgJoNjEeobAu33mphK9MyCGheRjsrNE', '2017-07-12 03:15:17', '2017-07-12 03:15:17'),
-(66, 'lect1', 'lect1@yahoo.com', '$2y$10$AGDtDRdL9t2vMbE1kuS6WOLGdINI08LF.Gu5f/VtUad/omT6zzKmS', 'lecturer', '6bKdmU95nBpGyDg4U2sNiASVsYyceIGMWnWeBGa1hn9P4s7TSb3ORUVXL0Zp', '2017-07-16 21:58:36', '2017-07-16 21:58:36'),
-(69, 'stud1', 'stud1@yahoo.com', '$2y$10$7gCe3gYVfqWgpz0AKxOwQujCagrSyFTt6YjbZZL0k63vhKvDbCcDS', 'student', 'kjcP8KpXwYCp5WQruHtZzyqnyY4f6aJ7aXhbTlyyu27XHvyKdBBhqc1S89am', '2017-07-16 22:10:05', '2017-07-16 22:10:05'),
+(1, 'admin', 'admin@yahoo.com', '$2y$10$atikM2L3Pl5s2gjP1OQFT.a6poyJyk8Sto8SoAEmyKJONz9Jz0HwS', 'admin', 'sLVnRzhZcotvRRE9354nR0Yi8xkzCjadyX2BTrH3VZrIljqPM28IdRreNIKr', '2017-07-12 03:15:17', '2017-07-12 03:15:17'),
+(66, 'lect1', 'lect1@yahoo.com', '$2y$10$AGDtDRdL9t2vMbE1kuS6WOLGdINI08LF.Gu5f/VtUad/omT6zzKmS', 'lecturer', 'gAO9IpzGfuFwFub92G34cZhOtaSFS8XmXA1NSJFIF0TbXFdlHig2YZLK6AcX', '2017-07-16 21:58:36', '2017-07-16 21:58:36'),
+(69, 'stud1', 'stud1@yahoo.com', '$2y$10$7gCe3gYVfqWgpz0AKxOwQujCagrSyFTt6YjbZZL0k63vhKvDbCcDS', 'student', 'jrDZHVotkevswh0afU5URhWZDvFxsxEJ35iBOsFBxiG4yuteQMiNHrCPI9x5', '2017-07-16 22:10:05', '2017-07-16 22:10:05'),
 (70, 'lect2', 'lect2@yahoo.com', '$2y$10$GP.eX4AYLV9rE9aqlPmPCeL6ppx0MI0.Bp8Wgpw.Mrd0N8Jab2DvG', 'lecturer', 'Z4epp3LEt4mfPqIIW0DYT8hSKAc0MK2KJ771WHfAJllDRDwnQuutW8XWXXFh', '2017-07-17 03:42:34', '2017-07-17 03:42:34'),
-(71, 'stud2', 'stud2@yahoo.com', '$2y$10$tIOveQQLgMyRaj5AllZk4Ox6Q.UuCaWnGb92qjDNAWQ4BZ1Jb.0qO', 'student', NULL, '2017-07-17 03:42:49', '2017-07-17 03:42:49');
+(71, 'stud2', 'stud2@yahoo.com', '$2y$10$tIOveQQLgMyRaj5AllZk4Ox6Q.UuCaWnGb92qjDNAWQ4BZ1Jb.0qO', 'student', NULL, '2017-07-17 03:42:49', '2017-07-17 03:42:49'),
+(72, 'stud3', 'stud3@yahoo.com', '$2y$10$41zFweNnZWBgVjvfTDsHNONRmGqGuWD.oV2IfVhA33.7u21Hisohu', 'student', NULL, '2017-07-30 02:38:53', '2017-07-30 02:38:53'),
+(73, 'stud4', 'stud4@yahoo.com', '$2y$10$t6NJYp555Fp5grAoJlmXHuU9W9WBMJ1qAhoFeo7hLrCz17xRLk8P.', 'student', NULL, '2017-07-30 02:40:37', '2017-07-30 02:40:37');
 
 --
 -- Indexes for dumped tables
@@ -320,7 +317,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mm_assignments`
 --
 ALTER TABLE `mm_assignments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `mm_evals`
 --
@@ -330,12 +327,12 @@ ALTER TABLE `mm_evals`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- Constraints for dumped tables
 --
@@ -376,4 +373,3 @@ ALTER TABLE `mm_evals`
 --
 ALTER TABLE `students`
   ADD CONSTRAINT `FK_Cohort` FOREIGN KEY (`cohort_id`) REFERENCES `cohorts` (`id`);
-
