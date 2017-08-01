@@ -2,6 +2,12 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
+      <!--
+        <li class="header">
+        <div class=''>
+            <span><h3>{{ Auth::user()->name }}</h3></span>
+        </li>
+      -->
       <div class="user-panel">
         <div class="pull-left image">
           <img src="A" class="img-circle" alt="User Image">

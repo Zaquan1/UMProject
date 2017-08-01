@@ -13,4 +13,9 @@ class lecturers extends Model
     {
         return $this->hasMany('App\mm_assignments', 'mentor_id');
     }
+
+    public function department()
+    {
+        return $this->belongsTo('App\departments', 'department_id');
+    }
 }

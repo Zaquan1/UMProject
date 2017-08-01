@@ -13,4 +13,9 @@ class students extends Model
     {
         return $this->hasOne('App\mm_assignments', 'mentee_id');
     }
+
+    public function cohort()
+    {
+        return $this->belongsTo('App\cohorts', 'cohort_id');
+    }
 }

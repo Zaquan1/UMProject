@@ -5,9 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\students;
 use Session;
+use App\Services\RoleServices as Roles;
 
 class StudentsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+    public function __construct(Roles $role)
+    {
+        $this->middleware('auth');
+        $this->role = $role;
+        $this->title = "Dashboard > Students";
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +29,10 @@ class StudentsController extends Controller
      */
     public function index()
     {
+        $data = $this->role->getRole();
+        $data['title'] = $this->title;
+        //return $data;
+        return view('users.students.index')->with('data', $data);
         //
     }
 

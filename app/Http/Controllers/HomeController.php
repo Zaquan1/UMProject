@@ -36,8 +36,6 @@ class HomeController extends Controller
 
     public function test()
     {
-        $data = $this->role->getRole();
-        $data['title'] = $this->title;
-        return view('mm_assignments.index')->with('data', $data);
+        return 10;
     }
 }

@@ -5,9 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\lecturers;
 use Session;
+use App\Services\RoleServices as Roles;
+use App\services\LecturerFormServices as LForm;
 
 class LecturersController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+    public function __construct(Roles $role, LForm $lForm)
+    {
+        $this->middleware('auth');
+        $this->role = $role;
+        $this->lForm = $lForm;
+        $this->title = "Dashboard > Lecturers";
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +31,10 @@ class LecturersController extends Controller
      */
     public function index()
     {
-        return "a";
+        $data = $this->role->getRole();
+        $data['title'] = $this->title;
+        //return $data;
+        return view('users.lecturers.index')->with('data', $data);
         //return redirect('/dashboard');
     }
 
@@ -68,7 +87,12 @@ class LecturersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = $this->role->getRole();
+        $data['lecturer'] = lecturers::find($id); 
+        $data['title'] = $this->title . " > " . $data['lecturer']->name . " > Edit";
+        $data['form'] = $this->lForm->getInfo();
+        //return $data;
+        return view('users.lecturers.edit')->with('data', $data);
     }
 
     /**
