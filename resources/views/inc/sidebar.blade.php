@@ -47,7 +47,6 @@
           </li>
 
         @endif
-
         @if(Auth::user()->role == "lecturer")
           <li class="header">LECTURER NAVIGATION</li>  
           <li class="active treeview">

@@ -46,16 +46,16 @@
 <button id="updateTodoCount">Update the todo count</button>
 @endsection
 @section('script')
-<script>
-$(function(){
-    $('#updateTodoCount').click(function(){
-        $.ajax({
-            url: "{{ route('test') }}",
-            success: function( response ) {
-                $('#totalTodos').text( response );
-            }
+    <script>
+        $(function(){
+            $('#updateTodoCount').click(function(){
+                $.ajax({
+                    url: "{{ route('test') }}",
+                    success: function( response ) {
+                        $('#totalTodos').text( response );
+                    }
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
 @endsection

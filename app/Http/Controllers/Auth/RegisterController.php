@@ -76,7 +76,7 @@ class RegisterController extends Controller
             ->with('user', $request->all())
             ->with('id', $user->id);
 
-    return rederect('/');
+    return redirect('/');
 }
 
     /**
