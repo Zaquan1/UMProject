@@ -15,6 +15,7 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Status</th>
                                     <th>Department</th>
                                     <th>Edit</th>
                                 </tr>
@@ -28,6 +29,7 @@
                                         </a>
                                     </td>
                                     <td>{{ $lecturerUser->lecturer->email }}</td>
+                                    <td>{{ $lecturerUser->lecturer->status }}</td>
                                     <td>{{ $lecturerUser->lecturer->department->name }}</td>
                                     <td>
                                         <a href = "{{ route('lecturers.edit', $lecturerUser->lecturer->id) }}" class = "btn btn-info">Edit</a>

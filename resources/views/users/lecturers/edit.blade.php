@@ -10,6 +10,7 @@
             <!-- form start -->
             {!! Form::open(['route' => ['lecturers.update', $data['lecturer']->id], 'method' => 'POST']) !!}
                 <div class="box-body">
+                    <!-- name box -->
                     <div class="row">
                         <div class="form-group">
                             {{Form::label('name', 'Name', ['class' => 'col-sm-2 control-label'])}}
@@ -18,6 +19,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- email box -->
                     <div class="row">
                         <div class="form-group">
                             {{Form::label('email', 'Email', ['class' => 'col-md-2 control-label'])}}
@@ -27,15 +29,25 @@
                             </div>
                         </div>
                     </div>
+                    <!-- status box -->
                     <div class="row">
                         <div class="form-group">
                             {{Form::label('status', 'Status', ['class' => 'col-md-2 control-label'])}}
 
                             <div class="col-sm-4">
-                                {{Form::select('status', ['On Leave', 'Active', ''], $data["lecturer"]->status,  ['class' => 'form-control', 'id' => 'status'])}}
+                                {{ Form::select('status', [
+                                    'On Leave' => 'On Leave',
+                                    'Active' => 'Active',
+                                    'Unknown' => 'Unknown',
+                                    'Dead' => 'Dead',
+                                    ], 
+                                    $data["lecturer"]->status,  
+                                    ['class' => 'form-control', 'id' => 'status']
+                                    ) }}
                             </div>
                         </div>
                     </div>
+                    <!-- department box -->
                     <div class="row">
                         <div class="form-group">
                             {{Form::label('department', 'Department', ['class' => 'col-md-2 control-label'])}}
@@ -48,8 +60,9 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-info pull-right">catFish</button>
+                {{ Form::hidden('_method', 'PUT') }}
+                <a href = "{{ route('lecturers.index') }}" class = "btn btn-default">Cancel</a>
+                {{ Form::submit('Submit', ['class'=>'btn btn-primary pull-right']) }}
               </div>
               <!-- /.box-footer -->
             {!! Form::close() !!}
