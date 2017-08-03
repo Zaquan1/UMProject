@@ -14,7 +14,7 @@ class AddFieldStudentIdToMmAssignmentsTable extends Migration
     public function up()
     {
         Schema::table('mm_assignments', function (Blueprint $table) {
-            //
+            $table->integer('student_id');
         });
     }
 
