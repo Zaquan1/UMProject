@@ -7,7 +7,7 @@ class LecturerFormServices
 {
     public function getInfo()
     {
-        $data['department'] = departments::all();
+        $data['department'] = departments::pluck('name', 'id')->all();
         return $data;
     }
 }

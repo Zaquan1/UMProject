@@ -88,7 +88,7 @@ class LecturersController extends Controller
     public function edit($id)
     {
         $data = $this->role->getRole();
-        $data['lecturer'] = lecturers::find($id); 
+        $data['lecturer'] = lecturers::with('department')->find($id); 
         $data['title'] = $this->title . " > " . $data['lecturer']->name . " > Edit";
         $data['form'] = $this->lForm->getInfo();
         //return $data;
