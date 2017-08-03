@@ -32,7 +32,7 @@
                             {{Form::label('status', 'Status', ['class' => 'col-md-2 control-label'])}}
 
                             <div class="col-sm-4">
-                                {{Form::select('status', ['On Leave', 'Active', ''], $data["lecturer"]->status,  ['class' => 'form-control', 'id' => 'status'])}}
+                                {{Form::select('status', ['On Leave', 'Available'], $data["lecturer"]->status,  ['class' => 'form-control', 'id' => 'status'])}}
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="submit" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-info pull-right">catFish</button>
+                <button type="submit" class="btn btn-info pull-right">Submit</button>
               </div>
               <!-- /.box-footer -->
             {!! Form::close() !!}

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\students;
 use Session;
 use App\Services\RoleServices as Roles;
+use App\services\StudentFormServices as LForm;
 
 class StudentsController extends Controller
 {
@@ -15,10 +16,11 @@ class StudentsController extends Controller
      * @return void
      */
 
-    public function __construct(Roles $role)
+    public function __construct(Roles $role, LForm $lForm)
     {
         $this->middleware('auth');
         $this->role = $role;
+        $this->lForm = $lForm;
         $this->title = "Dashboard > Students";
     }
 
@@ -85,7 +87,12 @@ class StudentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = $this->role->getRole();
+        $data['student'] = students::with('cohort')->find($id);
+        $data['title'] = $this->title . " > " . $data['student']->name . " > Edit";
+        $data['form'] = $this->lForm->getInfo();
+        //return $data;
+        return view('users.students.edit')->with('data', $data);
     }
 
     /**
