@@ -11,12 +11,12 @@ class mm_assignments extends Model
 
     public function students()
     {
-        return $this->belongsTo('App\students', 'mentee_id');
+        return $this->belongsTo('App\students', 'student_id');
     }
 
     public function lecturers()
     {
-        return $this->belongsTo('App\lecturers', 'mentor_id');
+        return $this->belongsTo('App\lecturers', 'lecturer_id');
     }
 
     public function mm_evals()

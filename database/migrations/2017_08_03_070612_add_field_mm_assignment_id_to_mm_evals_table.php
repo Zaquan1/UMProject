@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMmAssignmentsTable extends Migration
+class AddFieldMmAssignmentIdToMmEvalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateMmAssignmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mm_assignments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('lecturer_id')->nullable();
+        Schema::table('mm_evals', function (Blueprint $table) {
+            $table->integer('mm_assignment_id');
         });
     }
 
@@ -26,6 +25,8 @@ class CreateMmAssignmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mm_assignments');
+        Schema::table('mm_evals', function (Blueprint $table) {
+            //
+        });
     }
 }

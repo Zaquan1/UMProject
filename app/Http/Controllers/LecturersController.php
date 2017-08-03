@@ -104,7 +104,19 @@ class LecturersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
+        $lecturer = lecturers::find($id);
+        $lecturer->name = $request->input('name');
+        $lecturer->email = $request->input('email');
+        $lecturer->department_id = $request->input('department');
+        $lecturer->status = $request->input('status');
+        $lecturer->save();
+        return redirect('dashboard/lecturers');
+
     }
 
     /**

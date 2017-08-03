@@ -11,7 +11,7 @@ class lecturers extends Model
 
     public function mm_assignments()
     {
-        return $this->hasMany('App\mm_assignments', 'mentor_id');
+        return $this->hasMany('App\mm_assignments', 'lecturer_id');
     }
 
     public function department()
