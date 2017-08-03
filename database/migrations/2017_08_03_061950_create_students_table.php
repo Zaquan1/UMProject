@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->integer('cohort_id')->nullable();
             $table->string('name');
-            $table->string('metrix');
+            $table->string('metrix')->nullable();
             $table->string('email')->unique();
             $table->integer('user_id');
         });

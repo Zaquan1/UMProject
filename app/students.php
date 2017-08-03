@@ -11,7 +11,7 @@ class students extends Model
 
     public function mm_assignments()
     {
-        return $this->hasOne('App\mm_assignments', 'mentee_id');
+        return $this->hasOne('App\mm_assignments', 'student_id');
     }
 
     public function cohort()

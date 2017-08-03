@@ -28,7 +28,7 @@ class Mm_assignmentsController extends Controller
         $data = $this->role->getRole();
         $data['title'] = $this->title;
         $data['assignments'] = mm_assignments::with(['lecturers', 'students', 'mm_evals'])
-            ->orderBy(\DB::raw('-mentor_id'))->paginate(15); 
+            ->orderBy(\DB::raw('-lecturer_id'))->paginate(15); 
         //return $data;
         return view('mentor_mentee.mm_assignments.index')->with('data', $data);
     }
@@ -42,7 +42,7 @@ class Mm_assignmentsController extends Controller
     {
         $id = Session::get('id');
         $assignment = new mm_assignments;
-        $assignment->mentee_id = $id;
+        $assignment->student_id = $id;
         $assignment->save();
         return redirect('/register');
     }
