@@ -40,3 +40,7 @@ Route::resource('dashboard/mentor_mentee', 'Mm_assignmentsController');
 Route::get('/refer', 'HomeController@refer');
 
 Route::get('/test', 'HomeController@test')->name('test');
+
+Route::get('/dashboard/profile/{theName}', 'ProfileController@goToProfile');
+
+Route::resource('/dashboard/mentor_evaluation', 'MentorEvaluationFormController');

@@ -11,8 +11,8 @@
       <div class="user-panel">
 
         <div>
-          <a href="#" class="dropdown-toggle">
-            <br>
+          <a href="/dashboard/profile/{{ Auth::user()->name }}" class="dropdown-toggle">
+            <br> 
             <p>{{ Auth::user()->name }}</p>
           </a>
         </div>
