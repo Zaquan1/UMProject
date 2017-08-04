@@ -71,14 +71,54 @@
                             </div>
                         </div>
 
+                        <div id="lecturerForm" class="form-duration-div" style="display:none">
+                            <div class="form-group">
+                                {{Form::label('department', 'Department', ['class' => 'col-md-4 control-label'])}}
+
+                                <div class="col-sm-3">
+                                    {{Form::select('department', $data["lInfo"], null,  ['class' => 'form-control col-md-3', 'id' => 'department'])}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{Form::label('status', 'Status', ['class' => 'col-md-4 control-label'])}}
+
+                                <div class="col-md-3">
+                                    {{ Form::select('status', [
+                                        'On Leave' => 'On Leave',
+                                        'Active' => 'Active',
+                                        'Unknown' => 'Unknown',
+                                        'Dead' => 'Dead',
+                                        ], 
+                                        null,  
+                                        ['class' => 'form-control', 'id' => 'status']
+                                        ) 
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="studentForm" class="form-duration-div" style="display:none">
+                        
+                            <div class="form-group">
+                                {{Form::label('cohort', 'Cohort', ['class' => 'col-md-4 control-label'])}}
+
+                                <div class="col-sm-3">
+                                    {{Form::select('cohort', $data["sInfo"], null,  ['class' => 'form-control col-sm-3', 'id' => 'cohort'])}}
+                                </div>
+                            </div>
+                            
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <a href = "/" class = "btn btn-danger">Cancel</a>
-                                <div class="col-md-6">
                                     <button type="submit" class="btn btn-primary">
                                         Register
                                     </button>
+                                <div class="col-md-6">
+                                    <a href = "/" class = "btn btn-danger">Cancel</a>
                                 </div>
+                                <h1 id="totalTodos">0</h1>
+                                <button id="updateTodoCount">Update the todo count</button>
                             </div>
                         </div>
                     </form>
@@ -87,4 +127,25 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script>
+        $(function(){
+            $('#role').change(function(){
+                var role = $( "#role option:selected" ).val();//document.getElementById("role").value;
+                $('.form-duration-div').hide();
+                 $('#'+role+'Form').show();
+                $('#totalTodos').text(role);
+                //$('#divFrm'+divKey).show();
+                /*  
+                $.ajax({
+                    url: "{{ route('test') }}",
+                    success: function( response ) {
+                        $('#totalTodos').text( response );
+                    }
+                });
+                */
+            });
+        });
+    </script>
 @endsection

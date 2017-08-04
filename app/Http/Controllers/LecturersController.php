@@ -24,7 +24,6 @@ class LecturersController extends Controller
         $data['title'] = $this->title;
         //return $data;
         return view('users.lecturers.index')->with('data', $data);
-        //return redirect('/dashboard');
     }
 
     public function create()

@@ -80,7 +80,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              @if(count($data['user']->mm_assignments) > 0)
+              @if(!empty($data['user']->mm_assignments->lecturer))
                 <li>
                   <a href="{{ route('lecturers.show', $data['user']->mm_assignments->lecturers->id) }}">
                     <i class="fa fa-circle-o"></i>{{ $data['user']->mm_assignments->lecturers->name }}

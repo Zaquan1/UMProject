@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\services\LecturerFormServices as LForm;
+use App\services\StudentFormServices as SForm;
 
 
 class RegisterController extends Controller
@@ -38,10 +40,21 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(LForm $lForm, SForm $sForm)
     {
+        $this->lForm = $lForm;
+        $this->sForm = $sForm;
         //$this->middleware('auth');
+        
     }
+
+    public function showRegistrationForm()
+{
+    $data['lInfo'] = $this->lForm->getInfo();
+    $data['sInfo'] = $this->sForm->getInfo();
+    //return $data;
+    return view('auth.register')->with('data', $data);
+}
 
     /**
      * Get a validator for an incoming registration request.
