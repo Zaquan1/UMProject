@@ -10,12 +10,6 @@ use App\services\LecturerFormServices as LForm;
 
 class LecturersController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
     public function __construct(Roles $role, LForm $lForm)
     {
         $this->middleware('auth');
@@ -24,11 +18,6 @@ class LecturersController extends Controller
         $this->title = "Dashboard > Lecturers";
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $data = $this->role->getRole();
@@ -38,11 +27,6 @@ class LecturersController extends Controller
         //return redirect('/dashboard');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $user = Session::get( 'user' );
@@ -57,34 +41,21 @@ class LecturersController extends Controller
         return redirect('/register');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         return '/dashboard';
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $data = $this->role->getRole();
+
+        $data['lecturer'] = lecturers::find($id);
+        $data['title'] = $this->title . " > " . $data['lecturer']->name;
+
+        return view('users.lecturers.show')->with('data', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $data = $this->role->getRole();
@@ -95,13 +66,6 @@ class LecturersController extends Controller
         return view('users.lecturers.edit')->with('data', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -119,12 +83,6 @@ class LecturersController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
