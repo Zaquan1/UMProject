@@ -7,14 +7,16 @@ use App\lecturers;
 use Session;
 use App\Services\RoleServices as Roles;
 use App\services\LecturerFormServices as LForm;
+use App\services\UserUpdateServices as UserUpdate;
 
 class LecturersController extends Controller
 {
-    public function __construct(Roles $role, LForm $lForm)
+    public function __construct(Roles $role, LForm $lForm, UserUpdate $up)
     {
         $this->middleware('auth');
         $this->role = $role;
         $this->lForm = $lForm;
+        $this->up = $up;
         $this->title = "Dashboard > Lecturers";
     }
 
@@ -62,15 +64,10 @@ class LecturersController extends Controller
             'name' => 'required',
             'email' => 'required'
         ]);
-
         $lecturer = lecturers::find($id);
-        $lecturer->name = $request->input('name');
-        $lecturer->email = $request->input('email');
-        $lecturer->department_id = $request->input('department');
-        $lecturer->status = $request->input('status');
-        $lecturer->save();
-        return redirect('dashboard/lecturers');
+        $this->up->UpdateLect($lecturer, $request->all());
 
+        return redirect(route('lecturers.show', $id));
     }
 
     public function destroy($id)

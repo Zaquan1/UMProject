@@ -61,7 +61,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                 {{ Form::hidden('_method', 'PUT') }}
-                <a href = "{{ route('lecturers.index') }}" class = "btn btn-default">Cancel</a>
+                <a href = "{{ URL::previous() }}" class = "btn btn-default">Cancel</a>
                 {{ Form::submit('Submit', ['class'=>'btn btn-primary pull-right']) }}
               </div>
               <!-- /.box-footer -->

@@ -16,7 +16,7 @@
 					</li>
 				</ul>
 
-				<a href="#" class="btn btn-primary btn-block">Edit</a>
+				<a href="{{ route('students.edit', $data['student']->id) }}" class="btn btn-primary btn-block">Edit</a>
 
 			</div>
     	</div>

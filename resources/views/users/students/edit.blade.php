@@ -40,7 +40,8 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <button type="submit" class="btn btn-default">Cancel</button>
+            {{ Form::hidden('_method', 'PUT') }}
+            <a href = "{{ URL::previous() }}" class = "btn btn-default">Cancel</a>
             <button type="submit" class="btn btn-info pull-right">Submit</button>
         </div>
         <!-- /.box-footer -->
