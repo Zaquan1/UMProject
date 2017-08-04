@@ -6,16 +6,13 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-body box-profile">
-				<h1 class="text-center">{{ $data['lecturer']->name }}</h1>
+				<h1 class="text-center">{{ $data['student']->name }}</h1>
 
-				<p class="text-muted text-center">{{ $data['lecturer']->department->name }}</p>
+				<p class="text-muted text-center">Cohort: {{ $data['student']->cohort->year }}</p>
 
 				<ul class="list-group list-group-unbordered">
 					<li class="list-group-item">
-						<b>Email</b> <p class="pull-right">{{ $data['lecturer']->email }}</p>
-					</li>
-					<li class="list-group-item">
-						<b>Status</b> <p class="pull-right">{{ $data['lecturer']->status }}</p>
+						<b>Email</b> <p class="pull-right">{{ $data['student']->email }}</p>
 					</li>
 				</ul>
 
@@ -28,7 +25,7 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-body box-profile">
-				<h3 class="profile-username text-center">List of Mentees</h3>
+				<h3 class="profile-username text-center">Evaluations</h3>
 			</div>
 		</div>
 	</div>
