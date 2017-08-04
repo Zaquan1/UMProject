@@ -9,12 +9,14 @@
         </li>
       -->
       <div class="user-panel">
-        <div class="pull-left image">
-          <img src="A" class="img-circle" alt="User Image">
+
+        <div>
+          <a href="#" class="dropdown-toggle">
+            <!-- <br> -->
+            <h3>{{ Auth::user()->name }}</h3>
+          </a>
         </div>
-        <div class="pull-right info">
-          <p>{{ Auth::user()->name }}</p>
-        </div>
+        
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">

@@ -18,6 +18,9 @@
 						<b>Status</b> <p class="pull-right">{{ $data['lecturer']->status }}</p>
 					</li>
 				</ul>
+
+				<a href="{{ route('lecturers.edit', $data['lecturer']->id) }}" class="btn btn-primary btn-block">Edit</a>
+
 			</div>
     	</div>
 	</div>
@@ -28,12 +31,7 @@
 				<h3 class="profile-username text-center">List of Mentees</h3>
 			</div>
 		</div>
-		
 	</div>
 </div>
-
-    
-
-
 
 @endsection

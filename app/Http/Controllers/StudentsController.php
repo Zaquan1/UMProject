@@ -10,12 +10,6 @@ use App\services\StudentFormServices as LForm;
 
 class StudentsController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
     public function __construct(Roles $role, LForm $lForm)
     {
         $this->middleware('auth');
@@ -24,11 +18,6 @@ class StudentsController extends Controller
         $this->title = "Dashboard > Students";
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $data = $this->role->getRole();
@@ -38,11 +27,6 @@ class StudentsController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $user = Session::get( 'user' );
@@ -57,34 +41,21 @@ class StudentsController extends Controller
         //return redirect('/register');//$request->input('name');//redirect('/');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $data = $this->role->getRole();
+
+        $data['student'] = students::find($id);
+        $data['title'] = $this->title . " > " . $data['student']->name;
+
+        return view('users.students.show')->with('data', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $data = $this->role->getRole();
@@ -95,24 +66,11 @@ class StudentsController extends Controller
         return view('users.students.edit')->with('data', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
