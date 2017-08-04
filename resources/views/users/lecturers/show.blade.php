@@ -19,7 +19,7 @@
 					</li>
 				</ul>
 
-				<a href="#" class="btn btn-primary btn-block">Edit</a>
+				<a href="{{ route('lecturers.edit', $data['lecturer']->id) }}" class="btn btn-primary btn-block">Edit</a>
 
 			</div>
     	</div>
