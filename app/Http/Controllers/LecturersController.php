@@ -28,16 +28,7 @@ class LecturersController extends Controller
 
     public function create()
     {
-        $user = Session::get( 'user' );
-        $id = Session::get('id');
-        $lecturer = new lecturers;
-        $lecturer->user_id = $id;
-        $lecturer->name = $user['name'];
-        $lecturer->email = $user['email'];
-        $lecturer->save();
-        /*
-        */
-        return redirect('/register');
+        
     }
 
     public function store(Request $request)

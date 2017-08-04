@@ -29,16 +29,7 @@ class StudentsController extends Controller
 
     public function create()
     {
-        $user = Session::get( 'user' );
-        $id = Session::get('id');
-        $student = new students;
-        $student->user_id = $id;
-        $student->name = $user['name'];
-        $student->email = $user['email'];
-        $student->save();
-        return redirect()->action('Mm_assignmentsController@create')
-            ->with('id', $student->id);
-        //return redirect('/register');//$request->input('name');//redirect('/');
+        
     }
 
     public function store(Request $request)
