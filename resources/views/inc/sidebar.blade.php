@@ -12,8 +12,8 @@
 
         <div>
           <a href="#" class="dropdown-toggle">
-            <!-- <br> -->
-            <h3>{{ Auth::user()->name }}</h3>
+            <br>
+            <p>{{ Auth::user()->name }}</p>
           </a>
         </div>
         
