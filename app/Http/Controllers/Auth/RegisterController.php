@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\services\LecturerFormServices as LForm;
 use App\services\StudentFormServices as SForm;
+use App\services\StoreRegisterFormService as AllRegister;
 
 
 class RegisterController extends Controller
@@ -40,10 +41,11 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct(LForm $lForm, SForm $sForm)
+    public function __construct(LForm $lForm, SForm $sForm, AllRegister $allRegister)
     {
         $this->lForm = $lForm;
         $this->sForm = $sForm;
+        $this->allRegister = $allRegister;
         //$this->middleware('auth');
         
     }
@@ -75,21 +77,10 @@ class RegisterController extends Controller
     public function register(Request $request)
 {
     $this->validator($request->all())->validate();
-
-    //event(new Registered($user = $this->create($request->all())));
-    //The auto login code has been removed from here.
     $user = $this->create($request->all());
-    if($request->input('role') == "lecturer")
-        return redirect()->action('LecturersController@create')
-            ->with('user', $request->all())
-            ->with('id', $user->id);
 
-    elseif($request->input('role') == "student")
-        return redirect()->action('StudentsController@create')
-            ->with('user', $request->all())
-            ->with('id', $user->id);
-
-    return redirect('/');
+    $this->allRegister->register($request->all(), $user->id);
+    return redirect('/register');
 }
 
     /**

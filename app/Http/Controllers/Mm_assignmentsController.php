@@ -40,11 +40,7 @@ class Mm_assignmentsController extends Controller
      */
     public function create()
     {
-        $id = Session::get('id');
-        $assignment = new mm_assignments;
-        $assignment->student_id = $id;
-        $assignment->save();
-        return redirect('/register');
+        
     }
 
     /**
