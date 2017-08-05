@@ -22,17 +22,17 @@
                             </thead>
                             @foreach($data['lecturers'] as $lecturerUser)
                                 <tr>
-                                    <td>{{ $lecturerUser->lecturer->id }}</td>
+                                    <td>{{ $lecturerUser->id }}</td>
                                     <td>
-                                        <a href="{{ route('lecturers.show', $lecturerUser->lecturer->id) }}">
-                                            {{ $lecturerUser->lecturer->name }}
+                                        <a href="{{ route('lecturers.show', $lecturerUser->id) }}">
+                                            {{ $lecturerUser->name }}
                                         </a>
                                     </td>
-                                    <td>{{ $lecturerUser->lecturer->email }}</td>
-                                    <td>{{ $lecturerUser->lecturer->status }}</td>
-                                    <td>{{ $lecturerUser->lecturer->department->name }}</td>
+                                    <td>{{ $lecturerUser->email }}</td>
+                                    <td>{{ $lecturerUser->status }}</td>
+                                    <td>{{ $lecturerUser->department->name }}</td>
                                     <td>
-                                        <a href = "{{ route('lecturers.edit', $lecturerUser->lecturer->id) }}" class = "btn btn-info">Edit</a>
+                                        <a href = "{{ route('lecturers.edit', $lecturerUser->id) }}" class = "btn btn-info">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

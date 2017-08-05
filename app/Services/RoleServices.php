@@ -34,4 +34,9 @@ class RoleServices
 
         return $data;
     }
+    public function test()
+    {
+        $user = \Auth::user()->lecturer()->with('mm_assignments.students')->get();
+        return $user[0];
+    }
 }

@@ -21,16 +21,16 @@
                             </thead>
                             @foreach($data['students'] as $studentUser)
                                 <tr>
-                                    <td>{{ $studentUser->student->id }}</td>
+                                    <td>{{ $studentUser->id }}</td>
                                     <td>
-                                        <a href="{{ route('students.show', $studentUser->student->id) }}">
-                                            {{ $studentUser->student->name }}
+                                        <a href="{{ route('students.show', $studentUser->id) }}">
+                                            {{ $studentUser->name }}
                                         </a>
                                     </td>
-                                    <td>{{ $studentUser->student->email }}</td>
-                                    <td>{{ $studentUser->student->cohort->year }}</td>
+                                    <td>{{ $studentUser->email }}</td>
+                                    <td>{{ $studentUser->cohort->year }}</td>
                                     <td>
-                                        <a href = "{{ route('students.edit', $studentUser->student->id) }}" class = "btn btn-info">Edit</a>
+                                        <a href = "{{ route('students.edit', $studentUser->id) }}" class = "btn btn-info">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -42,8 +42,6 @@
             </div>
         </div>
     @endif
-    <h1 id="totalTodos">0</h1>
-<button id="updateTodoCount">Update the todo count</button>
 @endsection
 @section('script')
     <script>

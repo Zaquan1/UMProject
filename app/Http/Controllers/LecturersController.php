@@ -4,25 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\lecturers;
-use Session;
-use App\Services\RoleServices as Roles;
 use App\services\LecturerFormServices as LForm;
 use App\services\UserUpdateServices as UserUpdate;
 
 class LecturersController extends Controller
 {
-    public function __construct(Roles $role, LForm $lForm, UserUpdate $up)
+    public function __construct(LForm $lForm, UserUpdate $up)
     {
         $this->middleware('auth');
-        $this->role = $role;
         $this->lForm = $lForm;
         $this->up = $up;
         $this->title = "Dashboard > Lecturers";
     }
 
     public function index()
-    {
-        $data = $this->role->getRole();
+    {   
+        $data['lecturers'] = lecturers::with('department', 'mm_assignments')->get();
         $data['title'] = $this->title;
         //return $data;
         return view('users.lecturers.index')->with('data', $data);
@@ -40,8 +37,6 @@ class LecturersController extends Controller
 
     public function show($id)
     {
-        $data = $this->role->getRole();
-
         $data['lecturer'] = lecturers::find($id);
         $data['title'] = $this->title . " > " . $data['lecturer']->name;
 
@@ -50,7 +45,6 @@ class LecturersController extends Controller
 
     public function edit($id)
     {
-        $data = $this->role->getRole();
         $data['lecturer'] = lecturers::with('department')->find($id); 
         $data['title'] = $this->title . " > " . $data['lecturer']->name . " > Edit";
         $data['form'] = $this->lForm->getInfo();

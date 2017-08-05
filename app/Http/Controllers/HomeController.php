@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\RoleServices as Roles;
 
 class HomeController extends Controller
 {
@@ -12,10 +11,9 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(Roles $role)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->role = $role;
         $this->title = "Home";
     }
 
