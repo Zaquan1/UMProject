@@ -117,8 +117,6 @@
                                 <div class="col-md-6">
                                     <a href = "/" class = "btn btn-danger">Cancel</a>
                                 </div>
-                                <h1 id="totalTodos">0</h1>
-                                <button id="updateTodoCount">Update the todo count</button>
                             </div>
                         </div>
                     </form>

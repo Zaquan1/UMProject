@@ -30,7 +30,21 @@
 
 <div class="box box-primary">
 	<div class="box-header with-border">
-		
+		{!! Form::open() !!}
+
+		<div class="row">
+			<div class="form-group">
+				{{Form::label('dateOfMeet', 'Date Of Meet', ['class' => 'col-md-2 control-label'])}}
+				<div class="col-sm-4">
+					{{ Form::date('dateOfMeet', 
+					   \Carbon\Carbon::now(),
+					   ['class' => 'form-control', 'id' => 'dateOfMeet'])
+					}}
+	            </div>
+			</div>
+		</div>
+
+		{!! Form::close() !!}
 	</div>
 </div>
 
