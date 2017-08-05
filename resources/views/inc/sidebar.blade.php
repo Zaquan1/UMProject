@@ -59,8 +59,8 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              @if(count($data['user']->mm_assignments) > 0)
-                @foreach($data['user']->mm_assignments as $assignment)
+              @if(count($userRole->getRole()['user']->mm_assignments) > 0)
+                @foreach($userRole->getRole()['user']->mm_assignments as $assignment)
                   <li>
                     <a href="{{ route('students.show', $assignment->students->id) }}">
                       <i class="fa fa-circle-o"></i>{{ $assignment->students->name }}
@@ -82,10 +82,10 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              @if(!empty($data['user']->mm_assignments->lecturer))
+              @if(!empty($userRole->getRole()['user']->mm_assignments->lecturer))
                 <li>
                   <a href="{{ route('lecturers.show', $data['user']->mm_assignments->lecturers->id) }}">
-                    <i class="fa fa-circle-o"></i>{{ $data['user']->mm_assignments->lecturers->name }}
+                    <i class="fa fa-circle-o"></i>{{ $userRole->getRole()['user']->mm_assignments->lecturers->name }}
                   </a>
                 </li>
               @endif

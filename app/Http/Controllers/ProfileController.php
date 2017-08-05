@@ -25,8 +25,6 @@ class ProfileController extends Controller
     	$data['user'] = User::whereName($theName)->first();
     	$data['title'] = $this->title;
 
-    	//return $data;
-
     	return view('profile.profile')->with('data', $data);
     }
 }

@@ -2,6 +2,7 @@
 
 @section('content')
     @parent
+    @inject('userRole', 'App\Services\RoleServices')
     <div class="wrapper">
         @include('inc.header_navbar')
         @include('inc.sidebar')

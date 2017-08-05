@@ -32,6 +32,7 @@ class DashboardController extends Controller
         elseif (\Auth::user()->role == "lecturer")  { $route = 'pages.lecturer_dashboard'; }
         elseif(\Auth::user()->role == "student")    { $route = 'pages.student_dashboard'; }
         //return $data;
+        
         return view($route)->with('data', $data);
     }
 

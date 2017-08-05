@@ -16,9 +16,14 @@
 						<b>Role</b> <p class="pull-right">{{ $data['user']->role }}</p>
 					</li>
 				</ul>
-
-				<a href="" class="btn btn-primary btn-block">Edit</a>
-
+				<!--
+				@if(($data['user']->role == 'lecturer'))
+					<a href="{{}}" class="btn btn-primary btn-block">Edit</a>
+				@elseif(($data['user']->role == 'student'))
+					<a href="{{}}" class="btn btn-primary btn-block">Edit</a>
+				@else
+					<a href="{{}}" class="btn btn-primary btn-block">Edit</a>
+				-->
 			</div>
     	</div>
 	</div>

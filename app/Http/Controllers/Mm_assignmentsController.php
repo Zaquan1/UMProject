@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\mm_assignments;
 use Session;
-use App\Services\RoleServices as Roles;
 use Yajra\Datatables\Datatables;
 
 class Mm_assignmentsController extends Controller
 {
 
-    public function __construct(Roles $role)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->role = $role;
         $this->title = "Dashboard > Mentor Mentee";
     }
 
@@ -25,7 +23,6 @@ class Mm_assignmentsController extends Controller
      */
     public function index()
     {
-        $data = $this->role->getRole();
         $data['title'] = $this->title;
         $data['assignments'] = mm_assignments::with(['lecturers', 'students', 'mm_evals'])
             ->orderBy(\DB::raw('-lecturer_id'))->paginate(15); 
