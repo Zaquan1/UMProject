@@ -76,7 +76,7 @@
                                 {{Form::label('department', 'Department', ['class' => 'col-md-4 control-label'])}}
 
                                 <div class="col-sm-3">
-                                    {{Form::select('department', $data["lInfo"], null,  ['class' => 'form-control col-md-3', 'id' => 'department'])}}
+                                    {{Form::select('department', $data["lInfo"]["department"], null,  ['class' => 'form-control col-md-3', 'id' => 'department'])}}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -103,7 +103,7 @@
                                 {{Form::label('cohort', 'Cohort', ['class' => 'col-md-4 control-label'])}}
 
                                 <div class="col-sm-3">
-                                    {{Form::select('cohort', $data["sInfo"], null,  ['class' => 'form-control col-sm-3', 'id' => 'cohort'])}}
+                                    {{Form::select('cohort', $data["sInfo"]["cohort"], null,  ['class' => 'form-control col-sm-3', 'id' => 'cohort'])}}
                                 </div>
                             </div>
                             

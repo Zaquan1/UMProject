@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Services\RoleServices as Roles;
+use App\Services\DashboardInfoServices as Info;
 
 class DashboardController extends Controller
 {
@@ -12,10 +12,10 @@ class DashboardController extends Controller
      * @return void
      */
 
-    public function __construct(Roles $role)
+    public function __construct(Info $info)
     {
         $this->middleware('auth');
-        $this->role = $role;
+        $this->info = $info;
         $this->title = "Dashboard";
     }
 
@@ -26,14 +26,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $data = $this->role->getRole();
+        $data = $this->info->getInfo();
         $data['title'] = $this->title;
-        if(\Auth::user()->role == "admin")          { $route = 'pages.admin_dashboard'; }
-        elseif (\Auth::user()->role == "lecturer")  { $route = 'pages.lecturer_dashboard'; }
-        elseif(\Auth::user()->role == "student")    { $route = 'pages.student_dashboard'; }
         //return $data;
-        
-        return view($route)->with('data', $data);
+        return view('pages.dashboard')->with('data', $data);
     }
 
     public function test()
