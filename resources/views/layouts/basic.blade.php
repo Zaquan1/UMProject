@@ -27,6 +27,8 @@
         <link rel="stylesheet" href="{{ URL::asset('plugins/datepicker/datepicker3.css') }}">
         <!-- Daterange picker -->
         <link rel="stylesheet" href="{{ URL::asset('plugins/daterangepicker/daterangepicker.css') }}">
+        <!-- select2 -->
+        <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.css') }}">
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="{{ URL::asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
         <!-- Data table CSS -->
@@ -80,6 +82,8 @@
                 <script src="{{ URL::asset('plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
                 <!-- FastClick -->
                 <script src="{{ URL::asset('plugins/fastclick/fastclick.js') }}"></script>
+                <!--Select2-->
+                <script src="{{ URL::asset('plugins/select2/select2.js') }}"></script>
                 <!-- AdminLTE App -->
                 <script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
                 <!-- App scripts -->

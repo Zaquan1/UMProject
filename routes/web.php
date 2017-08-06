@@ -31,6 +31,10 @@ Route::get('dashboard/mentor_mentee/search', ['as'=>'mentor_mentee.data', 'uses'
 
 Route::resource('dashboard/mentor_mentee', 'Mm_assignmentsController');
 
+Route::get('dashboard/datatable', 'DataTableController@getLecturer')->name('dataTable.getDataL');
+
+Route::get('dashboard/datatable/{id}/{lId}', 'DataTableController@updateMm_assignment')->name('dataTable.MmUpdate');
+
 
 //Route::resource('dashboard/mentor_mentee', 'Mm_assignmentsController');
 
