@@ -8,6 +8,8 @@
 	</div>
 </div>
 
+{!! Form::open() !!}
+
 <h2 class="page-header">A. INFORMATION</h2>
 
 <div class="col-md-6">
@@ -30,8 +32,6 @@
 
 <div class="box box-primary">
 	<div class="box-header with-border">
-		{!! Form::open() !!}
-
 		<div class="row">
 			<div class="form-group">
 				{{Form::label('dateOfMeet', 'Date Of Meet', ['class' => 'col-md-2 control-label'])}}
@@ -44,8 +44,35 @@
 			</div>
 		</div>
 
-		{!! Form::close() !!}
+		<div class="row">
+            <div class="form-group">
+                {{Form::label('location', 'Location', ['class' => 'col-md-2 control-label'])}}
+
+                <div class="col-sm-4">
+                    {{Form::text('location', 'Catfish Alley', ['class' => 'form-control', 'id' => 'email'])}}
+                </div>
+            </div>
+      	</div>
 	</div>
 </div>
+
+
+<div class="box box-primary">
+	<div class="box-header">
+		<h2 class="page-header">C. FOR LECTURER ONLY</h2>
+	</div>
+
+	<div class="box-body">
+		<div class="form-group">
+			{{Form::label('purpose', 'Purpose of Meeting', ['class' => 'col-md-2 control-label'])}}
+			{{ Form::radio('purpose', 'Schedule meet', false, ['class' => 'flat-red']) }} Samting
+			<label>
+				<input type="radio" name="bla" class="flat-red"> blabla bla
+			</label>
+		</div>
+	</div>
+</div>
+
+{!! Form::close() !!}
 
 @endsection

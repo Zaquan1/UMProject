@@ -45,7 +45,7 @@
                                     ['class' => 'form-control', 'id' => 'status']
                                     ) }}
                             </div>
-                        </div>
+                        </div>  
                     </div>
                     <!-- department box -->
                     <div class="row">
