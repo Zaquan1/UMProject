@@ -46,6 +46,8 @@
 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        
         @yield('content')
         <!-- Script -->
         <div>
@@ -89,5 +91,6 @@
                 <!-- App scripts -->
                 @yield('script')
         </div>
+    </div>
     </body>
 </html>
