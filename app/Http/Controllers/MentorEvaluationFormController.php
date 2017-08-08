@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\mentor_eval;
+use App\mm_eval;
 
 class MentorEvaluationFormController extends Controller
 {
@@ -26,8 +28,23 @@ class MentorEvaluationFormController extends Controller
 
     public function store(Request $request)
     {
-        return $request->all();
-        //return redirect('/dashboard/mentor_evaluation');
+        //return $request->all();
+
+        mentor_eval::create([
+            'mm_eval_id' => 1,
+            'location' => $request->location,
+            'main_issue' => $request->main_issue,
+            'other_issue' => $request->other_issue,
+            'outcome' => $request->outcome,
+            'discussed_strategy' => $request->discussed_strategy,
+            'purpose' => $request->purpose,
+            'i_find_my_mentee' => $request->i_find_my_mentee,
+            'time_spent_with_mentee_was' => $request->time_spent_with_mentee_was,
+            'mentor_mentee_programme_is' => $request->mentor_mentee_programme_is,
+            'suggestion_and_comment' => $request->suggestion_and_comment
+        ]);
+
+        return redirect('/dashboard/mentor_evaluation');
     }
 
     public function show($id)
