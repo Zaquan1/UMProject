@@ -21,12 +21,13 @@ class MentorEvaluationFormController extends Controller
 
     public function create()
     {
-        //
+        
     }
 
     public function store(Request $request)
     {
-        //
+        return $request->all();
+        //return redirect('/dashboard/mentor_evaluation');
     }
 
     public function show($id)
