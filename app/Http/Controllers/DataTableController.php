@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Services\DataTableServices as DataTable;
 use App\lecturers;
 
@@ -30,10 +31,10 @@ class DataTableController extends Controller
         return json_encode($data);
     }
 
-    public function updateMm_assignment($id, $lId)
+    public function updateMm_assignment(Request $request)
     {
-        $this->dataTable->updateMm_assignment($id, $lId);
-        return true;
+        $test = $request->input('id');
+        return $test;
     }
 
     public function test()

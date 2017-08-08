@@ -14,6 +14,7 @@
                             @if(Auth::user()->role != "student")
                                 <th>Mentee</th>
                                 <th>Mentee Email</th>
+                                <th>Year</th>
                             @endif
                             @if(Auth::user()->role != "lecturer")
                                 <th>Mentor</th>
@@ -36,9 +37,11 @@
                                         </a>
                                     </td>
                                     <td>{{ $assignment->students->email }}</td>
+                                    <td>{{ $assignment->students->cohort->year }}</td>
                                 @endif
+                                
                                 @if(Auth::user()->role != "lecturer")
-                                    <td class="col-sm-5">
+                                    <td class="col-sm-5" id="tdl_mentee{{ $assignment->student_id }}">
                                         @if(empty($assignment->lecturers))
                                             <div class="col-sm-9">
                                                 {{ Form::select('mentor', 
@@ -63,15 +66,11 @@
                                             </a>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td id="tds_mentee{{ $assignment->student_id }}">
                                         @if(empty($assignment->lecturers->status))
                                             <span class="label label-danger">Unknown</span>
-                                        @elseif($assignment->lecturers->status == "Active")
-                                            <span class="label label-success">Active</span>
-                                        @elseif($assignment->lecturers->status == "On Leave")
-                                            <span class="label label-warning">On Leave</span>
                                         @else
-                                            <span class="label label-primary">{{ $assignment->lecturers->status }}</span>
+                                            <span>{{ $assignment->lecturers->status }}</span>
                                         @endif
                                     </td>
                                 @endif
@@ -98,14 +97,7 @@
             $('select').select2();
 
             //init select value/data
-            var allSelect = document.getElementsByClassName("form-control");
-            //var test = ' ';
-            for(let index = 0; index < allSelect.length; ++index)
-            {
-                //test +=$( "#cohort_" + allSelect[index].id).val();
-                replaceSelect(allSelect[index].id);
-            }
-            //$('#totalTodos').text(test);
+            findSelect();
             
             //when select is changed
             $('.form-control').change(function(){
@@ -116,21 +108,58 @@
                 $('#totalTodos').text(select + ' ' + strChosen+ ' ' + cohort);
             });
 
+            //when confirm button in click
             $('.btn-primary').click(function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
                 var button = $(this).attr('name');
                 var id = $("#id_" + button).val();
                 var lId = $( "#" + button + " option:selected" ).val();
-                $('#totalTodos').text("{{ url('dashboard/datatable') }}"+ '/' + id + '/' + lId);
+                var $data = {};
+                $data.id = id;
+                $data.lId = lId;
+
                 $.ajax({
-                    url: "{{ url('dashboard/datatable') }}"+ '/' + id + '/' + lId,
-                    type: "GET",
-                    dataType: "json",
+                    url: "{{ route('dataTable.MmUpdate') }}",
+                    type: "POST",
+                    data: {'id': id, 'lId': lId },
                     success: function(data){
-                        console.log(id)
-                        $('#totalTodos').text("success");
+                        $('#totalTodos').text(data);
+                    },
+                    error: function(jqXHR, exception)
+                    {var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        console.log(jqXHR);
+                        $('#totalTodos').text(msg);
                     }
                 });
             });
+
+            function findSelect()
+            {
+                var allSelect = document.getElementsByClassName("form-control");
+                for(let index = 0; index < allSelect.length; ++index)
+                {
+                    replaceSelect(allSelect[index].id);
+                }
+            }
 
             //replace select with new data
             function replaceSelect(selectId)
