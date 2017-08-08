@@ -42,6 +42,7 @@
                                 
                                 @if(Auth::user()->role != "lecturer")
                                     <td class="col-sm-5" id="tdl_mentee{{ $assignment->student_id }}">
+                                        <span id="test"></span>
                                         @if(empty($assignment->lecturers))
                                             <div class="col-sm-9">
                                                 {{ Form::select('mentor', 
@@ -54,7 +55,7 @@
                                                 }}
                                             </div>
 
-                                            {{ Form::hidden('invisibleCohort', $assignment->students->cohort->year, array('id' => 'cohort_mentee' . $assignment->student_id)) }}
+                                            {{ Form::hidden('invisibleCohort', $assignment->students->cohort->id, array('id' => 'cohort_mentee' . $assignment->student_id)) }}
                                             {{ Form::hidden('invisibleId', $assignment->id, array('id' => 'id_mentee' . $assignment->student_id)) }}
 
                                             <div id="btn_mentee{{ $assignment->student_id }}" class="col-sm-1" style="display:none">
@@ -88,7 +89,7 @@
             </div><!-- /.box -->
         </div>
     </div>
-    <h1 id="totalTodos">0</h1> 
+    <h1 id="totalTodos">{{ url(route('dataTable.getDataL', 2)) }}</h1> 
 @endsection
 @section('script')
     <script>
@@ -127,27 +128,18 @@
                     type: "POST",
                     data: {'id': id, 'lId': lId },
                     success: function(data){
-                        $('#totalTodos').text(data);
+                        console.log(data);
+                        $id = data.id;
+                        $('#tdl_' + button).html(
+                            "<a href={{ route('lecturers.show', '' ) }}/" + data.id + ">" + data.name + "<\a>"
+                            );
+                        $('#tds_' + button).text(data.status);
+                        $('#totalTodos').text(data.id);
+                        findSelect();
                     },
                     error: function(jqXHR, exception)
                     {var msg = '';
-                        if (jqXHR.status === 0) {
-                            msg = 'Not connect.\n Verify Network.';
-                        } else if (jqXHR.status == 404) {
-                            msg = 'Requested page not found. [404]';
-                        } else if (jqXHR.status == 500) {
-                            msg = 'Internal Server Error [500].';
-                        } else if (exception === 'parsererror') {
-                            msg = 'Requested JSON parse failed.';
-                        } else if (exception === 'timeout') {
-                            msg = 'Time out error.';
-                        } else if (exception === 'abort') {
-                            msg = 'Ajax request aborted.';
-                        } else {
-                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                        }
-                        console.log(jqXHR);
-                        $('#totalTodos').text(msg);
+                        $('#totalTodos').text("Error");
                     }
                 });
             });
@@ -157,19 +149,20 @@
                 var allSelect = document.getElementsByClassName("form-control");
                 for(let index = 0; index < allSelect.length; ++index)
                 {
-                    replaceSelect(allSelect[index].id);
+                    var cohort = $("#cohort_" + allSelect[index].id).val();
+                    replaceSelect(allSelect[index].id, cohort);
                 }
             }
 
             //replace select with new data
-            function replaceSelect(selectId)
+            function replaceSelect(selectId, cohort)
             {
                 $.ajax({
-                    url: "{{ route('dataTable.getDataL') }}",
+                    url: "{{ route('dataTable.getDataL', '') }}/"+ cohort,
                     type: "GET",
                     dataType: "json",
                     success: function(data){
-
+                        console.log(data);
                         $('#'+selectId).empty();
                         $('#'+selectId).append($("<option disabled selected value></option>")
                                 .text("None")); 
