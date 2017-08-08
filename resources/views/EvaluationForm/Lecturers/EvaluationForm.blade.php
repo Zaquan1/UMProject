@@ -6,27 +6,26 @@
 	<div class="box-header with-border">
 		<h1>Mentor Report</h1>
 	</div>
-	{!! Form::open() !!}
+	{!! Form::open(['route' => 'mentor_evaluation.store', 'method' => 'POST']) !!}
 
 	<div class="box-header">
 		<h2 class="page-header">MENTOR-MENTEE SESSION</h2>
 	</div>
 
 	<div class="form-group">
-		{{Form::label('dateOfMeet', 'Date Of Meet', ['class' => 'col-md-2 control-label'])}}
+		<label class="col-md-2 control-label">Date of Meet</label>
 		<div class="col-sm-4">
-			{{ Form::date('dateOfMeet', 
+			{{ Form::date('date_of_meet', 
 			   \Carbon\Carbon::now(),
-			   ['class' => 'form-control', 'id' => 'dateOfMeet'])
+			   ['class' => 'form-control', 'id' => 'date_of_meet'])
 			}}
         </div>
 	</div>
 	<br>
     <div class="form-group">
-        {{Form::label('location', 'Location', ['class' => 'col-md-2 control-label'])}}
-
+        <label class="col-md-2 control-label">Location</label>
         <div class="col-sm-4">
-            {{Form::text('location', 'Catfish Alley', ['class' => 'form-control', 'id' => 'email'])}}
+            {{Form::text('location', 'Catfish Alley', ['class' => 'form-control', 'id' => 'location'])}}
         </div>
     </div>
     <br><br>
@@ -45,16 +44,16 @@
 					{{Form::label('purpose', 'Discussion on Mentor-Mentee Session')}}
 				</h4>
 				<label>Main Issues</label>
-				{{ Form::textarea('MainIssue', null, ['class' => 'form-control']) }} 
+				{{ Form::textarea('main_issue', null, ['class' => 'form-control', 'id' => 'main_issue']) }} 
 				<br>
 				<label>Other Issues</label>
-				{{ Form::textarea('OtherIssue', null, ['class' => 'form-control']) }} 
+				{{ Form::textarea('other_issue', null, ['class' => 'form-control', 'id' => 'other_issue']) }} 
 				<br>
 				<label>Outcome</label>
-				{{ Form::textarea('Outcome', null, ['class' => 'form-control']) }} 
+				{{ Form::textarea('outcome', null, ['class' => 'form-control', 'id' => 'outcome']) }} 
 				<br>
 				<label>Strategies discussed</label>
-				{{ Form::textarea('stratergy', null, ['class' => 'form-control']) }} 
+				{{ Form::textarea('discussed_strategy', null, ['class' => 'form-control', 'id' => 'discussed_strategy']) }} 
 				<br>
 			</div>
 			<br>
@@ -79,68 +78,143 @@
 				{{ Form::radio('purpose', 'discussion', false, ['class' => 'flat-red']) }} 
 				Discussion
 				<br><br>
-				<label>Others</label>
-				{{ Form::text('purpose', null, ['class' => 'form-control']) }}
+
+				<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js">
+				</script>
+
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('#purpose_text').click(function(){
+							$('#after').attr('checked', true);
+						});
+					});
+
+					function setOtherPurpose(){
+						if (document.getElementById("after").checked == true){
+							document.getElementById("after").value = document.getElementById("purpose_text").value;
+						}
+					}
+
+				</script>
+
+				<input type="radio" id="after" name="purpose" value="">
+				<label>
+					Others
+				</label>
+				{{ Form::text('purpose_text', null, ['class' => 'form-control', 'id' => 'purpose_text', 'onchange' =>'setOtherPurpose();']) }}
 			</div>
+
+				
 		</section>
 
 		<section class="invoice">
 			<div class="form-group">
 				<h4>
-					{{Form::label('iFindMyMentee', 'Feedback for this Session')}}
+					{{Form::label('i_find_my_mentee', 'Feedback for this Session')}}
 				</h4>
 				<strong>1. I find my mentee:</strong><br>
-				{{ Form::radio('iFindMyMentee', 'not interested in MBBS', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('i_find_my_mentee', 'not interested in MBBS', false, ['class' => 'flat-red']) }} 
 				Not interested in MBBS
 				<br>
-				{{ Form::radio('iFindMyMentee', 'Struggling in MBBS', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('i_find_my_mentee', 'Struggling in MBBS', false, ['class' => 'flat-red']) }} 
 				Struggling in MBBS
 				<br>
-				{{ Form::radio('iFindMyMentee', 'need counselling', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('i_find_my_mentee', 'need counselling', false, ['class' => 'flat-red']) }} 
 				Need counselling
 				<br>
-				{{ Form::radio('iFindMyMentee', 'doing well', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('i_find_my_mentee', 'doing well', false, ['class' => 'flat-red']) }} 
 				Doing well
 				<br><br>
+
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('#i_find_my_mentee_other').click(function(){
+							$('#after3').attr('checked', true);
+						});
+					});
+
+					function setOtherFeedback(){
+						if (document.getElementById("after3").checked == true){
+							document.getElementById("after3").value = document.getElementById("i_find_my_mentee_other").value;
+						}
+					}
+					
+				</script>
+
+				<input type="radio" id="after3" name="i_find_my_mentee" value="">
 				<label>Others</label>
-				{{ Form::text('iFindMyMentee', null, ['class' => 'form-control']) }}
+				{{ Form::text('i_find_my_mentee_other', null, ['class' => 'form-control', 'id' => 'i_find_my_mentee_other', 'onchange' =>'setOtherFeedback();']) }}
 				<br><br>
 
 
 				<strong>2. The time spent with the mentee was:</strong><br>
-				{{ Form::radio('timeSpentWithMenteeWas', 'adequate', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('time_spent_with_mentee_was', 'adequate', false, ['class' => 'flat-red']) }} 
 				Adequate
 				<br>
-				{{ Form::radio('timeSpentWithMenteeWas', 'a waste of time', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('time_spent_with_mentee_was', 'a waste of time', false, ['class' => 'flat-red']) }} 
 				A waste of time
 				<br>
-				{{ Form::radio('timeSpentWithMenteeWas', 'encouraging', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('time_spent_with_mentee_was', 'encouraging', false, ['class' => 'flat-red']) }} 
 				Encouraging
 				<br>
-				{{ Form::radio('timeSpentWithMenteeWas', 'beneficial', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('time_spent_with_mentee_was', 'beneficial', false, ['class' => 'flat-red']) }} 
 				Beneficial
 				<br><br>
+
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('#time_spent_with_mentee_was_other').click(function(){
+							$('#after2').attr('checked', true);
+						});
+					});
+
+					function setOtherTimeSpentSummary(){
+						if (document.getElementById("after2").checked == true){
+							document.getElementById("after2").value = document.getElementById("time_spent_with_mentee_was_other").value;
+						}
+					}
+					
+				</script>
+
+				<input type="radio" id="after2" name="time_spent_with_mentee_was" value="">
 				<label>Others</label>
-				{{ Form::text('timeSpentWithMenteeWas', null, ['class' => 'form-control']) }}
+				{{ Form::text('time_spent_with_mentee_was_other', null, ['class' => 'form-control', 'id' => 'time_spent_with_mentee_was_other', 'onchange' =>'setOtherTimeSpentSummary();']) }}
 			</div>
 		</section>
 
 		<section class="invoice">
 			<div class="form-group">
 				<h4>
-					{{Form::label('mentorMenteeProgramme', 'Mentor-Mentee Programme')}}
+					{{Form::label('mentor_mentee_programme_is', 'Mentor-Mentee Programme')}}
 				</h4>
 
 				<strong>In my opinion the Mentor-Mentee programme is:</strong><br>
 
-				{{ Form::radio('mentorMenteeProgramme', 'schedule meet', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('mentor_mentee_programme_is', 'schedule meet', false, ['class' => 'flat-red']) }} 
 				A waste of time
 				<br>
-				{{ Form::radio('mentorMenteeProgramme', 'counselling', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('mentor_mentee_programme_is', 'counselling', false, ['class' => 'flat-red']) }} 
 				Beneficial to the student
 				<br><br>
+
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('#mentor_mentee_programme_is_other').click(function(){
+							$('#after4').attr('checked', true);
+						});
+					});
+
+					function setOtherMentorMenteeFeedback(){
+						if (document.getElementById("after4").checked == true){
+							document.getElementById("after4").value = document.getElementById("mentor_mentee_programme_is_other").value;
+						}
+					}
+					
+				</script>
+
+				<input type="radio" id="after4" name="mentor_mentee_programme_is" value="">
 				<label>Others</label>
-				{{ Form::text('mentorMenteeProgramme', null, ['class' => 'form-control']) }}
+				{{ Form::text('mentor_mentee_programme_is_other', null, ['class' => 'form-control', 'id' => 'mentor_mentee_programme_is_other', 'onchange' =>'setOtherMentorMenteeFeedback();']) }}
 			</div>
 		</section>
 	</div>
@@ -150,13 +224,14 @@
 	<section class="invoice">
 		<h2 class="page-header">Suggestions/Comments</h2>
 
-		{{ Form::textarea('suggestionsAndComments', null, ['class' => 'form-control']) }}
+		{{ Form::textarea('suggestion_and_comment', null, ['class' => 'form-control']) }}
 	</section>
 </div>
 
 <div class="row">
 	<div class="invoice">
-		<a href="#" class="btn btn-primary btn-block"><b>Submit</b></a>
+		<!-- <a type="submit" href="#" class="btn btn-primary btn-block"><b>Submit</b></a> -->
+		{{ Form::submit('Submit', ['class'=>'btn btn-primary btn-block']) }}
 	</div>
 </div>
 
