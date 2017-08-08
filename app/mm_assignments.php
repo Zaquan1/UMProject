@@ -21,6 +21,6 @@ class mm_assignments extends Model
 
     public function mm_evals()
     {
-        return $this->hasMany('App\mm_evals', 'mm_assignment_id');
+        return $this->hasMany('App\mm_eval', 'mm_assignment_id');
     }
 }
