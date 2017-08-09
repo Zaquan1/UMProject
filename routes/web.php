@@ -48,3 +48,5 @@ Route::get('/test', 'HomeController@test')->name('test');
 Route::get('/dashboard/profile/{theName}', 'ProfileController@goToProfile');
 
 Route::resource('/dashboard/mentor_evaluation', 'MentorEvaluationFormController');
+
+Route::resource('/dashboard/mentee_evaluation', 'MenteeEvaluationFormController');
