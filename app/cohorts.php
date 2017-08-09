@@ -12,4 +12,5 @@ class cohorts extends Model
     {
         return $this->hasMany('App\students', 'cohort_id');
     }
+
 }

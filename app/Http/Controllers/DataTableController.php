@@ -25,20 +25,23 @@ class DataTableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getLecturer()
+    public function getLecturer($cohort)
     {
-        $data = lecturers::pluck('name', 'id')->all();
-        return json_encode($data);
+        return json_encode($this->dataTable->lectNoCohortIn($cohort));
     }
 
     public function updateMm_assignment(Request $request)
     {
-        $test = $request->input('id');
-        return $test;
+        $id = $request->input('id');
+        $lId = $request->input('lId');
+        $this->dataTable->updateAssignment($id, $lId);
+        $choosenMentor = lecturers::find($lId);
+        return $choosenMentor;
     }
 
-    public function test()
+    public function test($cohort)
     {
-        return 10;
+       $data = $this->dataTable->lectNoCohortIn($cohort);
+        return $data;
     }
 }
