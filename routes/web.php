@@ -37,7 +37,6 @@ Route::post('dashboard/datatable/update', 'DataTableController@updateMm_assignme
 
 Route::get('dashboard/datatable/test/{cohort}', 'DataTableController@test');
 
-Route::resource('/dashboard/mentor_evaluation', 'MentorEvaluationFormController');
 //Route::resource('dashboard/mentor_mentee', 'Mm_assignmentsController');
 
 //Route::get('lecturers/create/{id}', 'LecturersController@create');
@@ -48,3 +47,7 @@ Route::get('/refer', 'HomeController@refer');
 Route::get('/test', 'HomeController@test')->name('test');
 
 Route::get('/dashboard/profile/{theName}', 'ProfileController@goToProfile');
+
+Route::resource('/dashboard/mentor_evaluation', 'MentorEvaluationFormController');
+
+Route::resource('/dashboard/mentee_evaluation', 'MenteeEvaluationFormController');
