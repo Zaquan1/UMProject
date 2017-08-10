@@ -94,6 +94,7 @@
         </div>
     </div>
     <h1 id="totalTodos">{{ url(route('dataTable.getDataL', 2)) }}</h1> 
+    
 @endsection
 @section('script')
     <script>

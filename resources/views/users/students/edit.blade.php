@@ -32,7 +32,7 @@
                     {{Form::label('cohort', 'Cohort', ['class' => 'col-md-2 control-label'])}}
 
                     <div class="col-sm-4">
-                        {{Form::select('cohort', $data["form"]["cohort"], $data["student"]->cohort->id,  ['class' => 'form-control m-bot15', 'id' => 'cohort'])}}
+                        {{Form::select('cohort', $data["form"]["cohort"], $data["student"]->cohort->id,  ['class' => 'form-control select2', 'id' => 'cohort'])}}
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                             'mentor', 
                             $data["form"]["availLect"], 
                             empty($data['student']->mm_assignments->lecturer_id)? null : $data["student"]->mm_assignments->lecturer_id,  
-                            ['class' => 'form-control m-bot15', 'id' => 'mentor']
+                            ['class' => 'form-control select2', 'id' => 'mentor']
                         )}}
                     </div>
                 </div>
@@ -66,6 +66,7 @@
 @section('script')
     <script>
         $(function(){
+            $('select').select2();
             
             var currentLect_name = $('#mentor option:selected').text();
             $('#test').text(currentLect_name);
@@ -82,7 +83,7 @@
                         console.log(data);
                         $('#mentor').empty();
                         $('#mentor').append($("<option selected></option>")
-                            .attr("value", null)
+                            .attr("value", '')
                             .text("None")); 
                         if(cohort_id == "{{ $data['student']->cohort_id }}" && currentLect_id != '')
                         {

@@ -51,14 +51,11 @@ class StudentsController extends Controller
         $data['title'] = $this->title . " > " . $data['student']->name . " > Edit";
         $data['form']['cohort'] = $this->lForm->getInfo();
         $data['form']['availLect'] = $this->lForm->lectNoCohortIn($data['student']->cohort_id);
-        if(empty($data['student']->mm_assignments->lecturer_id))
-        {
-            $data['form']['availLect'][null] = 'None';
-        }
-        else
+        if(!empty($data['student']->mm_assignments->lecturer_id))
         {
             $data['form']['availLect'][$data['student']->mm_assignments->lecturer_id] = $data['student']->mm_assignments->lecturers->name;
         }
+        $data['form']['availLect'][null] = 'None';
         //return $data;
         return view('users.students.edit')->with('data', $data);
     }
