@@ -42,25 +42,29 @@
                                 
                                 @if(Auth::user()->role != "lecturer")
                                     <td class="col-sm-5" id="tdl_mentee{{ $assignment->student_id }}">
-                                        <span id="test"></span>
+                                    
                                         @if(empty($assignment->lecturers))
-                                            <div class="col-sm-9">
-                                                {{ Form::select('mentor', 
-                                                    [], 
-                                                    'None',  
-                                                    [
-                                                        'class' => 'form-control select2', 
-                                                        'id' => 'mentee' . $assignment->student_id
-                                                    ]) 
-                                                }}
-                                            </div>
+                                            @if(Auth::user()->role == "admin")
+                                                <div class="col-sm-9">
+                                                    {{ Form::select('mentor', 
+                                                        [], 
+                                                        'None',  
+                                                        [
+                                                            'class' => 'form-control select2', 
+                                                            'id' => 'mentee' . $assignment->student_id
+                                                        ]) 
+                                                    }}
+                                                </div>
 
-                                            {{ Form::hidden('invisibleCohort', $assignment->students->cohort->id, array('id' => 'cohort_mentee' . $assignment->student_id)) }}
-                                            {{ Form::hidden('invisibleId', $assignment->id, array('id' => 'id_mentee' . $assignment->student_id)) }}
+                                                {{ Form::hidden('invisibleCohort', $assignment->students->cohort->id, array('id' => 'cohort_mentee' . $assignment->student_id)) }}
+                                                {{ Form::hidden('invisibleId', $assignment->id, array('id' => 'id_mentee' . $assignment->student_id)) }}
 
-                                            <div id="btn_mentee{{ $assignment->student_id }}" class="col-sm-1" style="display:none">
-                                                <a href = "#" class = "btn btn-primary" name="mentee{{ $assignment->student_id }}">Confirm</a>
-                                            </div>
+                                                <div id="btn_mentee{{ $assignment->student_id }}" class="col-sm-1" style="display:none">
+                                                    <a href = "#" class = "btn btn-primary" name="mentee{{ $assignment->student_id }}">Confirm</a>
+                                                </div>
+                                            @else
+                                                None
+                                            @endif
                                         @else
                                             <a href="{{ route('lecturers.show', $assignment->lecturers->id) }}">
                                                 {{ $assignment->lecturers->name }}

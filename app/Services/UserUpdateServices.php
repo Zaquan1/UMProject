@@ -26,7 +26,9 @@ class UserUpdateServices
         $student->name = $updateS['name'];
         $student->email = $updateS['email'];
         $student->cohort_id = $updateS['cohort'];
+        $student->mm_assignments->lecturer_id = $updateS['mentor'];
         $student->save();
+        $student->mm_assignments->save();
 
         $user = User::find($student->user_id);
         $user->name = $updateS['name'];
