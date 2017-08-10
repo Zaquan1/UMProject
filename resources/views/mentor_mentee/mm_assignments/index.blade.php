@@ -93,7 +93,7 @@
             </div><!-- /.box -->
         </div>
     </div>
-    <h1 id="totalTodos">{{ url(route('dataTable.getDataL', 2)) }}</h1> 
+    <h1 id="test"></h1> 
     
 @endsection
 @section('script')
@@ -111,7 +111,6 @@
                 var select = $( "#" + strChosen + " option:selected" ).val();
                 var cohort = $("#cohort_" + strChosen).val();
                 $('#btn_'+strChosen).show();
-                $('#totalTodos').text(select + ' ' + strChosen+ ' ' + cohort);
             });
 
             //when confirm button in click
@@ -124,10 +123,7 @@
                 var button = $(this).attr('name');
                 var id = $("#id_" + button).val();
                 var lId = $( "#" + button + " option:selected" ).val();
-                var $data = {};
-                $data.id = id;
-                $data.lId = lId;
-
+                
                 $.ajax({
                     url: "{{ route('dataTable.MmUpdate') }}",
                     type: "POST",
@@ -139,12 +135,11 @@
                             "<a href={{ route('lecturers.show', '' ) }}/" + data.id + ">" + data.name + "<\a>"
                             );
                         $('#tds_' + button).text(data.status);
-                        $('#totalTodos').text(data.id);
                         findSelect();
                     },
                     error: function(jqXHR, exception)
                     {var msg = '';
-                        $('#totalTodos').text("Error");
+                        $('#test').text("Error");
                     }
                 });
             });

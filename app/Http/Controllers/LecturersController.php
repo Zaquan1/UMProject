@@ -37,7 +37,7 @@ class LecturersController extends Controller
 
     public function show($id)
     {
-        $data['lecturer'] = lecturers::find($id);
+        $data['lecturer'] = lecturers::with('mm_assignments.students')->find($id);
         $data['title'] = $this->title . " > " . $data['lecturer']->name;
 
         return view('users.lecturers.show')->with('data', $data);

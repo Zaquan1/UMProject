@@ -60,7 +60,7 @@
         <!-- /.box-footer -->
         {!! Form::close() !!}
     </div>
-    <h1 id="test">0</h1>
+    <h1 id="test"></h1>
 @endsection
 
 @section('script')
@@ -69,7 +69,6 @@
             $('select').select2();
             
             var currentLect_name = $('#mentor option:selected').text();
-            $('#test').text(currentLect_name);
 
             $('#cohort').change(function(){
                 var cohort_id = $('#cohort').val();
@@ -103,9 +102,7 @@
                                 $('#mentor').append($("<option></option>")
                                     .attr("value",key)
                                     .text(value)); 
-
                             }
-                        
                         });
                     }
                 });
