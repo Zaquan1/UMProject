@@ -25,7 +25,12 @@ class DataTableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getLecturer($cohort)
+     public function getLect()
+     {
+         return lecturers::pluck('name', 'id')->all();
+     }
+
+    public function getLectFilter($cohort)
     {
         return json_encode($this->dataTable->lectNoCohortIn($cohort));
     }

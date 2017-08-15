@@ -17,7 +17,15 @@
                                 <th>Year</th>
                             @endif
                             @if(Auth::user()->role != "lecturer")
-                                <th>Mentor</th>
+                                <th>
+                                    Mentor
+                                    @if(Auth::user()->role == "admin")
+                                        <span class="pull-right">
+                                            {{ Form::checkbox('filterLect', 1, true, ['class' => 'minimal', 'id' => 'filterLect', 'onClick'=>'check(this);']) }}
+                                            {{Form::label('filterLectL', 'Filter by Cohort', [])}}
+                                        </span>
+                                    @endif
+                                </th>
                                 <th>Mentor Status</th>
                             @endif
                             <th>Evaluation</th>
@@ -113,20 +121,34 @@
 @endsection
 @section('script')
     <script>
+        
         $(function(){
             //init select2 css
             $('select').select2();
-            
-            //init select value/data
-            findSelect();
 
-            var dTable = $("#table2").DataTable({
-                "paging": false
+            //init checkbox
+            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                checkboxClass: 'icheckbox_minimal-blue',
+                radioClass: 'iradio_minimal-blue'
             });
 
+            //init dataTable
+            var dTable = $("#table2").DataTable({
+                "paging": false,
+                "initComplete": function(){
+                    findSelect();
+                }
+            });
+
+            //everychanges on table will update
             dTable.on( 'draw', function () {
                 findSelect();  
             } );
+
+            //update every changes in checkbox
+            $('#filterLect').on('ifChanged', function(){
+                findSelect();
+            });
             
             //when select is changed
             $('.form-control').change(function(){
@@ -167,22 +189,54 @@
                 });
             });
 
+            //find all select
             function findSelect()
             {
                 var allSelect = document.getElementsByClassName("form-control");
-                console.log(allSelect.length);
-                for(let index = 0; index < allSelect.length; ++index)
+                var url;
+                if ($('#filterLect').is(':checked')) 
                 {
-                    var cohort = $("#cohort_" + allSelect[index].id).val();
-                    replaceSelect(allSelect[index].id, cohort);
+                    for(let index = 0; index < allSelect.length; ++index)
+                    {
+                        var cohort = $("#cohort_" + allSelect[index].id).val();
+                        replaceSelectFilter(allSelect[index].id, cohort);
+                    }
+                }
+                else 
+                {
+                    replaceSelect(allSelect);
                 }
             }
 
-            //replace select with new data
-            function replaceSelect(selectId, cohort)
+            
+            function replaceSelect(allSelect)
             {
                 $.ajax({
-                    url: "{{ route('dataTable.getDataL', '') }}/"+ cohort,
+                    url: "{{ route('dataTable.getDataL') }}",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data){
+                        for(let index = 0; index < allSelect.length; ++index)
+                        {
+                            var selectId = allSelect[index].id;
+                            $('#'+selectId).empty();
+                            $('#'+selectId).append($("<option disabled selected value></option>")
+                                    .text("None")); 
+                            $.each(data, function(key, value){
+                                $('#'+selectId).append($("<option></option>")
+                                    .attr("value",key)
+                                    .text(value)); 
+                            });
+                        }
+                    }
+                });
+            }
+
+            //replace select with new data that had been filtered
+            function replaceSelectFilter(selectId, cohort)
+            {
+                $.ajax({
+                    url: "{{ route('dataTable.getDataLFC', '') }}/"+ cohort,
                     type: "GET",
                     dataType: "json",
                     success: function(data){

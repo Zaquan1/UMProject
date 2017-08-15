@@ -31,6 +31,8 @@
         <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.css') }}">
         <!-- Data table CSS -->
         <link rel="stylesheet" href="{{ URL::asset('plugins/datatables/dataTables.bootstrap.css') }}">
+        <!-- Checkbox n radio CSS -->
+        <link rel="stylesheet" href="{{ URL::asset('plugins/iCheck/all.css') }}">
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="{{ URL::asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
@@ -85,6 +87,8 @@
                 <script src="{{ URL::asset('plugins/select2/select2.js') }}"></script>
                 <!-- DataTables -->
                 <script src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+                <!-- Checkbox n radio -->
+                <script src="{{ URL::asset('plugins/iCheck/icheck.min.js') }}"></script>
                 <!-- AdminLTE App -->
                 <script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
                 <!-- App scripts -->
