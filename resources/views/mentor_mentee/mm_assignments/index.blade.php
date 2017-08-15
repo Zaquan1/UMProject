@@ -7,8 +7,8 @@
                 <div class="box-header">
                     <h3 class="box-title">Mentor-Mentee Assignment</h3>
                 </div><!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover" id="table2">
+                <div class="box-body">
+                    <table  class="table table-bordered table-striped" id="table2">
                         <thead>
                         <tr>
                             @if(Auth::user()->role != "student")
@@ -23,70 +23,85 @@
                             <th>Evaluation</th>
                         </tr>
                         </thead>
-                        @foreach($data['assignments'] as $assignment)
-                            @if(Auth::user()->role == 'lecturer' && Auth::user()->lecturer->id != $assignment->lecturer_id)
-                                @continue
-                            @elseif(Auth::user()->role == 'student' && Auth::user()->student->id != $assignment->student_id)
-                                @continue
-                            @endif
-                            <tr>
-                                @if(Auth::user()->role != "student")
+                        <tbody>
+                            @foreach($data['assignments'] as $assignment)
+                                @if(Auth::user()->role == 'lecturer' && Auth::user()->lecturer->id != $assignment->lecturer_id)
+                                    @continue
+                                @elseif(Auth::user()->role == 'student' && Auth::user()->student->id != $assignment->student_id)
+                                    @continue
+                                @endif
+                                <tr>
+                                    @if(Auth::user()->role != "student")
+                                        <td>
+                                            <a href="{{ route('students.show', $assignment->students->id) }}">
+                                                {{ $assignment->students->name }}
+                                            </a>
+                                        </td>
+                                        <td>{{ $assignment->students->email }}</td>
+                                        <td>{{ $assignment->students->cohort->year }}</td>
+                                    @endif
+                                    
+                                    @if(Auth::user()->role != "lecturer")
+                                        <td class="col-sm-5" id="tdl_mentee{{ $assignment->student_id }}">
+                                        
+                                            @if(empty($assignment->lecturers))
+                                                @if(Auth::user()->role == "admin")
+                                                    <div class="col-sm-9">
+                                                        {{ Form::select('mentor', 
+                                                            [], 
+                                                            'None',  
+                                                            [
+                                                                'class' => 'form-control select2', 
+                                                                'id' => 'mentee' . $assignment->student_id
+                                                            ]) 
+                                                        }}
+                                                    </div>
+
+                                                    {{ Form::hidden('invisibleCohort', $assignment->students->cohort->id, array('id' => 'cohort_mentee' . $assignment->student_id)) }}
+                                                    {{ Form::hidden('invisibleId', $assignment->id, array('id' => 'id_mentee' . $assignment->student_id)) }}
+
+                                                    <div id="btn_mentee{{ $assignment->student_id }}" class="col-sm-1" style="display:none">
+                                                        <a href = "#" class = "btn btn-primary" name="mentee{{ $assignment->student_id }}">Confirm</a>
+                                                    </div>
+                                                @else
+                                                    None
+                                                @endif
+                                            @else
+                                                <a href="{{ route('lecturers.show', $assignment->lecturers->id) }}">
+                                                    {{ $assignment->lecturers->name }}
+                                                </a>
+                                            @endif
+                                        </td>
+                                        <td id="tds_mentee{{ $assignment->student_id }}">
+                                            @if(empty($assignment->lecturers->status))
+                                                <span class="label label-danger">Unknown</span>
+                                            @else
+                                                <span>{{ $assignment->lecturers->status }}</span>
+                                            @endif
+                                        </td>
+                                    @endif
                                     <td>
-                                        <a href="{{ route('students.show', $assignment->students->id) }}">
-                                            {{ $assignment->students->name }}
+                                        <a href = "{{ route('evaluation.index') }}" class = "btn btn-info">
+                                            Total: {{ count($assignment->mm_evals)}}
                                         </a>
                                     </td>
-                                    <td>{{ $assignment->students->email }}</td>
-                                    <td>{{ $assignment->students->cohort->year }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                @if(Auth::user()->role != "student")
+                                    <th>Mentee</th>
+                                    <th>Mentee Email</th>
+                                    <th>Year</th>
                                 @endif
-                                
                                 @if(Auth::user()->role != "lecturer")
-                                    <td class="col-sm-5" id="tdl_mentee{{ $assignment->student_id }}">
-                                    
-                                        @if(empty($assignment->lecturers))
-                                            @if(Auth::user()->role == "admin")
-                                                <div class="col-sm-9">
-                                                    {{ Form::select('mentor', 
-                                                        [], 
-                                                        'None',  
-                                                        [
-                                                            'class' => 'form-control select2', 
-                                                            'id' => 'mentee' . $assignment->student_id
-                                                        ]) 
-                                                    }}
-                                                </div>
-
-                                                {{ Form::hidden('invisibleCohort', $assignment->students->cohort->id, array('id' => 'cohort_mentee' . $assignment->student_id)) }}
-                                                {{ Form::hidden('invisibleId', $assignment->id, array('id' => 'id_mentee' . $assignment->student_id)) }}
-
-                                                <div id="btn_mentee{{ $assignment->student_id }}" class="col-sm-1" style="display:none">
-                                                    <a href = "#" class = "btn btn-primary" name="mentee{{ $assignment->student_id }}">Confirm</a>
-                                                </div>
-                                            @else
-                                                None
-                                            @endif
-                                        @else
-                                            <a href="{{ route('lecturers.show', $assignment->lecturers->id) }}">
-                                                {{ $assignment->lecturers->name }}
-                                            </a>
-                                        @endif
-                                    </td>
-                                    <td id="tds_mentee{{ $assignment->student_id }}">
-                                        @if(empty($assignment->lecturers->status))
-                                            <span class="label label-danger">Unknown</span>
-                                        @else
-                                            <span>{{ $assignment->lecturers->status }}</span>
-                                        @endif
-                                    </td>
+                                    <th>Mentor</th>
+                                    <th>Mentor Status</th>
                                 @endif
-                                <td>
-                                    <a href = "{{ route('evaluation.index') }}" class = "btn btn-info">
-                                        Total: {{ count($assignment->mm_evals)}}
-                                    </a>
-                                </td>
+                                <th>Evaluation</th>
                             </tr>
-                        @endforeach
-
+                        </tfoot>    
                     </table>
                     
                 </div><!-- /.box-body -->
@@ -101,9 +116,17 @@
         $(function(){
             //init select2 css
             $('select').select2();
-
+            
             //init select value/data
             findSelect();
+
+            var dTable = $("#table2").DataTable({
+                "paging": false
+            });
+
+            dTable.on( 'draw', function () {
+                findSelect();  
+            } );
             
             //when select is changed
             $('.form-control').change(function(){
@@ -129,7 +152,7 @@
                     type: "POST",
                     data: {'id': id, 'lId': lId },
                     success: function(data){
-                        console.log(data);
+
                         $id = data.id;
                         $('#tdl_' + button).html(
                             "<a href={{ route('lecturers.show', '' ) }}/" + data.id + ">" + data.name + "<\a>"
@@ -147,6 +170,7 @@
             function findSelect()
             {
                 var allSelect = document.getElementsByClassName("form-control");
+                console.log(allSelect.length);
                 for(let index = 0; index < allSelect.length; ++index)
                 {
                     var cohort = $("#cohort_" + allSelect[index].id).val();
@@ -162,7 +186,7 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data){
-                        console.log(data);
+                        
                         $('#'+selectId).empty();
                         $('#'+selectId).append($("<option disabled selected value></option>")
                                 .text("None")); 

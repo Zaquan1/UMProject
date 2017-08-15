@@ -29,10 +29,11 @@
         <link rel="stylesheet" href="{{ URL::asset('plugins/daterangepicker/daterangepicker.css') }}">
         <!-- select2 -->
         <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.css') }}">
+        <!-- Data table CSS -->
+        <link rel="stylesheet" href="{{ URL::asset('plugins/datatables/dataTables.bootstrap.css') }}">
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="{{ URL::asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
-        <!-- Data table CSS -->
-        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,8 +50,6 @@
         @yield('content')
         <!-- Script -->
         <div>
-                <!-- DataTables -->
-                <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
                 <!-- jQuery 2.2.3 -->
                 <script src="{{ URL::asset('plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
                 <!-- jQuery UI 1.11.4 -->
@@ -84,6 +83,8 @@
                 <script src="{{ URL::asset('plugins/fastclick/fastclick.js') }}"></script>
                 <!--Select2-->
                 <script src="{{ URL::asset('plugins/select2/select2.js') }}"></script>
+                <!-- DataTables -->
+                <script src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
                 <!-- AdminLTE App -->
                 <script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
                 <!-- App scripts -->

@@ -79,25 +79,20 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data){
+                        
                         console.log(data);
                         $('#mentor').empty();
                         $('#mentor').append($("<option selected></option>")
                             .attr("value", '')
                             .text("None")); 
-                        if(cohort_id == "{{ $data['student']->cohort_id }}" && currentLect_id != '')
+                        if(currentLect_id != '')
                         {
                             $('#mentor').append($("<option selected></option>")
                                 .attr("value",currentLect_id)
                                 .text(currentLect_name)); 
                         }
                         $.each(data, function(key, value){
-                            if(currentLect_id == key)
-                            {
-                                $('#mentor').append($("<option selected></option>")
-                                .attr("value",key)
-                                .text(value));     
-                            }
-                            else
+                            if(currentLect_id != key)
                             {
                                 $('#mentor').append($("<option></option>")
                                     .attr("value",key)

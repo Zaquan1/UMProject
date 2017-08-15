@@ -25,7 +25,7 @@ class Mm_assignmentsController extends Controller
     {
         $data['title'] = $this->title;
         $data['assignments'] = mm_assignments::with(['lecturers', 'students.cohort', 'mm_evals'])
-            ->orderBy(\DB::raw('-lecturer_id'))->paginate(15); 
+            ->orderBy(\DB::raw('-lecturer_id'))->get(); 
         //return $data;
         return view('mentor_mentee.mm_assignments.index')->with('data', $data);
     }
