@@ -8,7 +8,7 @@
                     <h3 class="box-title">Mentor-Mentee Assignment</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                    <table  class="table table-bordered table-striped" id="table2">
+                    <table  class="table table-hover" id="table1">
                         <thead>
                         <tr>
                             @if(Auth::user()->role != "student")
@@ -95,21 +95,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                @if(Auth::user()->role != "student")
-                                    <th>Mentee</th>
-                                    <th>Mentee Email</th>
-                                    <th>Year</th>
-                                @endif
-                                @if(Auth::user()->role != "lecturer")
-                                    <th>Mentor</th>
-                                    <th>Mentor Status</th>
-                                @endif
-                                <th>Evaluation</th>
-                            </tr>
-                        </tfoot>    
+                        </tbody>  
                     </table>
                     
                 </div><!-- /.box-body -->
@@ -133,8 +119,7 @@
             });
 
             //init dataTable
-            var dTable = $("#table2").DataTable({
-                "paging": false,
+            var dTable = $("#table1").DataTable({
                 "initComplete": function(){
                     findSelect();
                 }

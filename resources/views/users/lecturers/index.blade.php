@@ -8,8 +8,8 @@
                     <div class="box-header">
                         <h3 class="box-title">Students</h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="table2">
+                    <div class="box-body">
+                        <table class="table table-hover" id="table1">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -44,4 +44,11 @@
             </div>
         </div>
     @endif
+@endsection
+@section('script')
+    <script>
+        $(function(){
+            $('#table1').DataTable();
+        });
+    </script>
 @endsection

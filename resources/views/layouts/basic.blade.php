@@ -87,6 +87,7 @@
                 <script src="{{ URL::asset('plugins/select2/select2.js') }}"></script>
                 <!-- DataTables -->
                 <script src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+                <script src="{{ URL::asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
                 <!-- Checkbox n radio -->
                 <script src="{{ URL::asset('plugins/iCheck/icheck.min.js') }}"></script>
                 <!-- AdminLTE App -->
