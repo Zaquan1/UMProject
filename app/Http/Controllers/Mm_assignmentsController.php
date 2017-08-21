@@ -95,6 +95,7 @@ class Mm_assignmentsController extends Controller
     {
         //
     }
+    
     public function anyData()
     {
         return Datatables::of(mm_assignments::query())->make(true);

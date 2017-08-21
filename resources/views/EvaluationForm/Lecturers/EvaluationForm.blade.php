@@ -66,16 +66,16 @@
 				<h4>
 					{{Form::label('purpose', 'Purpose of Mentor-Mentee Session')}}
 				</h4>
-				{{ Form::radio('purpose', 'schedule meet', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('purpose', 'Schedule meet', false, ['onclick' => 'document.getElementById("purpose_text").disabled = true;']) }} 
 				Schedule meet
 				<br>
-				{{ Form::radio('purpose', 'counselling', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('purpose', 'Counselling', false, ['onclick' => 'document.getElementById("purpose_text").disabled = true;']) }} 
 				Counselling
 				<br>
-				{{ Form::radio('purpose', 'academic', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('purpose', 'Academic', false, ['onclick' => 'document.getElementById("purpose_text").disabled = true;']) }} 
 				Academic
 				<br>
-				{{ Form::radio('purpose', 'discussion', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('purpose', 'Discussion', false, ['onclick' => 'document.getElementById("purpose_text").disabled = true;']) }} 
 				Discussion
 				<br><br>
 
@@ -97,11 +97,11 @@
 
 				</script>
 
-				<input type="radio" id="after" name="purpose" value="">
+				<input type="radio" id="after" name="purpose" value="" onclick="document.getElementById('purpose_text').disabled = false;">
 				<label>
 					Others
 				</label>
-				{{ Form::text('purpose_text', null, ['class' => 'form-control', 'id' => 'purpose_text', 'onchange' =>'setOtherPurpose();']) }}
+				{{ Form::text('purpose_text', null, ['class' => 'form-control', 'id' => 'purpose_text', 'onchange' =>'setOtherPurpose();', 'disabled' => 'disabled']) }}
 			</div>
 
 				
@@ -113,16 +113,16 @@
 					{{Form::label('i_find_my_mentee', 'Feedback for this Session')}}
 				</h4>
 				<strong>1. I find my mentee:</strong><br>
-				{{ Form::radio('i_find_my_mentee', 'not interested in MBBS', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('i_find_my_mentee', 'Not interested in MBBS', false, ['onclick' => 'document.getElementById("i_find_my_mentee_other").disabled = true;']) }} 
 				Not interested in MBBS
 				<br>
-				{{ Form::radio('i_find_my_mentee', 'Struggling in MBBS', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('i_find_my_mentee', 'Struggling in MBBS', false, ['onclick' => 'document.getElementById("i_find_my_mentee_other").disabled = true;']) }} 
 				Struggling in MBBS
 				<br>
-				{{ Form::radio('i_find_my_mentee', 'need counselling', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('i_find_my_mentee', 'Need counselling', false, ['onclick' => 'document.getElementById("i_find_my_mentee_other").disabled = true;']) }} 
 				Need counselling
 				<br>
-				{{ Form::radio('i_find_my_mentee', 'doing well', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('i_find_my_mentee', 'Doing well', false, ['onclick' => 'document.getElementById("i_find_my_mentee_other").disabled = true;']) }} 
 				Doing well
 				<br><br>
 
@@ -141,23 +141,23 @@
 					
 				</script>
 
-				<input type="radio" id="after3" name="i_find_my_mentee" value="">
+				<input type="radio" id="after3" name="i_find_my_mentee" value="" onclick="document.getElementById('i_find_my_mentee_other').disabled = false;">
 				<label>Others</label>
-				{{ Form::text('i_find_my_mentee_other', null, ['class' => 'form-control', 'id' => 'i_find_my_mentee_other', 'onchange' =>'setOtherFeedback();']) }}
+				{{ Form::text('i_find_my_mentee_other', null, ['class' => 'form-control', 'id' => 'i_find_my_mentee_other', 'onchange' =>'setOtherFeedback();', 'disabled' => 'disabled']) }}
 				<br><br>
 
 
 				<strong>2. The time spent with the mentee was:</strong><br>
-				{{ Form::radio('time_spent_with_mentee_was', 'adequate', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('time_spent_with_mentee_was', 'Adequate', false, ['class' => 'flat-red']) }} 
 				Adequate
 				<br>
-				{{ Form::radio('time_spent_with_mentee_was', 'a waste of time', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('time_spent_with_mentee_was', 'A waste of time', false, ['class' => 'flat-red']) }} 
 				A waste of time
 				<br>
-				{{ Form::radio('time_spent_with_mentee_was', 'encouraging', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('time_spent_with_mentee_was', 'Encouraging', false, ['class' => 'flat-red']) }} 
 				Encouraging
 				<br>
-				{{ Form::radio('time_spent_with_mentee_was', 'beneficial', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('time_spent_with_mentee_was', 'Beneficial', false, ['class' => 'flat-red']) }} 
 				Beneficial
 				<br><br>
 
@@ -176,9 +176,9 @@
 					
 				</script>
 
-				<input type="radio" id="after2" name="time_spent_with_mentee_was" value="">
+				<input type="radio" id="after2" name="time_spent_with_mentee_was" value="" onclick="document.getElementById('time_spent_with_mentee_was_other').disabled = false;">
 				<label>Others</label>
-				{{ Form::text('time_spent_with_mentee_was_other', null, ['class' => 'form-control', 'id' => 'time_spent_with_mentee_was_other', 'onchange' =>'setOtherTimeSpentSummary();']) }}
+				{{ Form::text('time_spent_with_mentee_was_other', null, ['disabled' => 'disabled','class' => 'form-control', 'id' => 'time_spent_with_mentee_was_other', 'onchange' =>'setOtherTimeSpentSummary();']) }}
 			</div>
 		</section>
 
@@ -190,10 +190,10 @@
 
 				<strong>In my opinion the Mentor-Mentee programme is:</strong><br>
 
-				{{ Form::radio('mentor_mentee_programme_is', 'schedule meet', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('mentor_mentee_programme_is', 'A waste of time', false, ['class' => 'flat-red']) }} 
 				A waste of time
 				<br>
-				{{ Form::radio('mentor_mentee_programme_is', 'counselling', false, ['class' => 'flat-red']) }} 
+				{{ Form::radio('mentor_mentee_programme_is', ' ', false, ['class' => 'flat-red']) }} 
 				Beneficial to the student
 				<br><br>
 
