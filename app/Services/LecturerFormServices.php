@@ -10,4 +10,5 @@ class LecturerFormServices
         $data['department'] = departments::pluck('name', 'id')->all();
         return $data;
     }
+
 }

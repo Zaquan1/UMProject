@@ -103,7 +103,7 @@
                                 {{Form::label('cohort', 'Cohort', ['class' => 'col-md-4 control-label'])}}
 
                                 <div class="col-sm-3">
-                                    {{Form::select('cohort', $data["sInfo"]["cohort"], null,  ['class' => 'form-control col-sm-3', 'id' => 'cohort'])}}
+                                    {{Form::select('cohort', $data["sInfo"], null,  ['class' => 'form-control col-sm-3', 'id' => 'cohort'])}}
                                 </div>
                             </div>
                             

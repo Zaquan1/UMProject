@@ -14,6 +14,17 @@
 					<li class="list-group-item">
 						<b>Email</b> <p class="pull-right">{{ $data['student']->email }}</p>
 					</li>
+					<li class="list-group-item">
+						<b>Mentor</b>
+						<p class="pull-right">
+							@if(empty($data['student']->mm_assignments->lecturer_id)) 
+								None
+							@else
+								{{ $data['student']->mm_assignments->lecturers->name }}
+							@endif
+						</p>
+							
+					</li>
 				</ul>
 
 				<a href="{{ route('students.edit', $data['student']->id) }}" class="btn btn-primary btn-block">Edit</a>

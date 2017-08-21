@@ -21,7 +21,6 @@
             <div class="row">
                 <div class="form-group">
                     {{Form::label('email', 'Email', ['class' => 'col-md-2 control-label'])}}
-
                     <div class="col-sm-4">
                         {{Form::text('email', $data["student"]->email, ['class' => 'form-control', 'id' => 'email'])}}
                     </div>
@@ -33,7 +32,21 @@
                     {{Form::label('cohort', 'Cohort', ['class' => 'col-md-2 control-label'])}}
 
                     <div class="col-sm-4">
-                        {{Form::select('cohort', $data["form"], $data["student"]->cohort->id,  ['class' => 'form-control m-bot15', 'id' => 'cohort'])}}
+                        {{Form::select('cohort', $data["form"]["cohort"], $data["student"]->cohort->id,  ['class' => 'form-control select2', 'id' => 'cohort'])}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    {{Form::label('mentor', 'Mentor', ['class' => 'col-md-2 control-label'])}}
+
+                    <div class="col-sm-4">
+                        {{Form::select(
+                            'mentor', 
+                            $data["form"]["availLect"], 
+                            empty($data['student']->mm_assignments->lecturer_id)? null : $data["student"]->mm_assignments->lecturer_id,  
+                            ['class' => 'form-control select2', 'id' => 'mentor']
+                        )}}
                     </div>
                 </div>
             </div>
@@ -47,4 +60,51 @@
         <!-- /.box-footer -->
         {!! Form::close() !!}
     </div>
+    <h1 id="test"></h1>
+@endsection
+
+@section('script')
+    <script>
+        $(function(){
+            $('select').select2();
+            
+            var currentLect_name = $('#mentor option:selected').text();
+
+            $('#cohort').change(function(){
+                var cohort_id = $('#cohort').val();
+                var currentLect_id = "{{ $data['student']->mm_assignments->lecturer_id }}";
+                
+                $.ajax({
+                    url: "{{ route('dataTable.getDataL', '') }}/"+ cohort_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data){
+                        
+                        console.log(data);
+                        $('#mentor').empty();
+                        $('#mentor').append($("<option selected></option>")
+                            .attr("value", '')
+                            .text("None")); 
+                        if(currentLect_id != '')
+                        {
+                            $('#mentor').append($("<option selected></option>")
+                                .attr("value",currentLect_id)
+                                .text(currentLect_name)); 
+                        }
+                        $.each(data, function(key, value){
+                            if(currentLect_id != key)
+                            {
+                                $('#mentor').append($("<option></option>")
+                                    .attr("value",key)
+                                    .text(value)); 
+                            }
+                        });
+                    }
+                });
+            });
+
+            
+
+        });
+    </script>
 @endsection
