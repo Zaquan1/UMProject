@@ -29,10 +29,10 @@ class MenteeEvaluationFormController extends Controller
 
     public function store(Request $request)
     {
-        $my_mentor_was = implode(" , ", $request->get('my_mentor_was'));
+        $mentor_feedback = implode(" , ", $request->get('mentor_feedback'));
         //return $my_mentor_was;
 
-        return $request->all();
+        return $request->all(); 
     }
 
     public function show($id)

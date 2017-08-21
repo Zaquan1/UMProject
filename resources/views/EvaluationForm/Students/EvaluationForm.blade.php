@@ -82,29 +82,29 @@
 	<section class="invoice">
 		<div class="form-group">
 			<h4>
-				{{Form::label('this_session_was', 'Feedback for this Session')}}
+				{{Form::label('session_feedback', 'Feedback for this Session')}}
 			</h4>
 			<strong>1. This session was:</strong><br>
-			{{ Form::radio('this_session_was', 'Very helpful', false, ['class' => 'flat-red']) }} 
+			{{ Form::radio('session_feedback', 'Very helpful', false, ['class' => 'flat-red']) }} 
 			Very helpful
 			<br>
-			{{ Form::radio('this_session_was', 'Helpful', false, ['class' => 'flat-red']) }} 
+			{{ Form::radio('session_feedback', 'Helpful', false, ['class' => 'flat-red']) }} 
 			Helpful
 			<br>
-			{{ Form::radio('this_session_was', 'Somewhat helpful', false, ['class' => 'flat-red']) }} 
+			{{ Form::radio('session_feedback', 'Somewhat helpful', false, ['class' => 'flat-red']) }} 
 			Somewhat helpful
 			<br>
-			{{ Form::radio('this_session_was', 'Not at all helpful', false, ['class' => 'flat-red']) }} 
+			{{ Form::radio('session_feedback', 'Not at all helpful', false, ['class' => 'flat-red']) }} 
 			Not at all helpful
 			<br>
-			{{ Form::radio('this_session_was', 'Unnecessary', false, ['class' => 'flat-red']) }} 
+			{{ Form::radio('session_feedback', 'Unnecessary', false, ['class' => 'flat-red']) }} 
 			Unnecessary
 			<br><br>
 
 			<strong>2. Comments:</strong>
 			<br>
 
-			{{ Form::text('this_session_was_comment', null, ['class' => 'form-control', 'id' => 'this_session_was_comment']) }}
+			{{ Form::text('session_comment', null, ['class' => 'form-control', 'id' => 'session_comment']) }}
 			<br>
 		</div>
 	</section>
@@ -112,35 +112,35 @@
 	<section class="invoice">
 		<div class="form-group">
 			<h4>
-				{{Form::label('my_mentor_was', 'My Mentor Was:')}}
+				{{Form::label('mentor_feedback', 'My Mentor Was:')}}
 			</h4>
 			<p>(You can tick more than one)</p>
 
-			{{ Form::checkbox('my_mentor_was[]', 'Approachable', false) }}
+			{{ Form::checkbox('mentor_feedback[]', 'Approachable', false) }}
 			Approachable
 			<br>
-			{{ Form::checkbox('my_mentor_was[]', 'Understanding', false) }}
+			{{ Form::checkbox('mentor_feedback[]', 'Understanding', false) }}
 			Understanding
 			<br>
-			{{ Form::checkbox('my_mentor_was[]', 'Interested to know more', false) }}
+			{{ Form::checkbox('mentor_feedback[]', 'Interested to know more', false) }}
 			Interested to know more
 			<br>
-			{{ Form::checkbox('my_mentor_was[]', 'Accommodating', false) }}
+			{{ Form::checkbox('mentor_feedback[]', 'Accommodating', false) }}
 			Accommodating
 			<br>
-			{{ Form::checkbox('my_mentor_was[]', 'Knowledgeable', false) }}
+			{{ Form::checkbox('mentor_feedback[]', 'Knowledgeable', false) }}
 			Knowledgeable
 			<br>
-			{{ Form::checkbox('my_mentor_was[]', 'Difficult to contact', false) }}
+			{{ Form::checkbox('mentor_feedback[]', 'Difficult to contact', false) }}
 			Difficult to contact
 			<br>
-			{{ Form::checkbox('my_mentor_was[]', 'Uninterested', false) }}
+			{{ Form::checkbox('mentor_feedback[]', 'Uninterested', false) }}
 			Uninterested
 			<br>
-			{{ Form::checkbox('my_mentor_was[]', 'Not resourceful', false) }}
+			{{ Form::checkbox('mentor_feedback[]', 'Not resourceful', false) }}
 			Not resourceful
 			<br>
-			{{ Form::checkbox('my_mentor_was[]', 'Unpleasant/Unfriendly', false) }}
+			{{ Form::checkbox('mentor_feedback[]', 'Unpleasant/Unfriendly', false) }}
 			Unpleasant/Unfriendly
 			<br><br>
 
@@ -158,7 +158,7 @@
 
 			{{ Form::checkbox('checkboxy', null, false, ['id' => 'checkboxy', 'onclick' => 'disableTextInput(this)']) }}
 			<label>Others</label>
-			{{ Form::text('my_mentor_was[]', null, array('class' => 'form-control', 'id' => 'hiddenInput', 'disabled' => 'disabled')) }}
+			{{ Form::text('mentor_feedback[]', null, array('class' => 'form-control', 'id' => 'hiddenInput', 'disabled' => 'disabled')) }}
 			
 		</div>
 	</section>

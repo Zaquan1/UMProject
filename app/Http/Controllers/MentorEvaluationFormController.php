@@ -23,7 +23,7 @@ class MentorEvaluationFormController extends Controller
 
     public function create()
     {
-        
+        //blank
     }
 
     public function store(Request $request)
@@ -31,7 +31,7 @@ class MentorEvaluationFormController extends Controller
         //return $request->all();
 
         mentor_eval::create([
-            'mm_eval_id' => 1,
+            'mm_eval_id' => 1, //just used to set the value to default
             'location' => $request->location,
             'main_issue' => $request->main_issue,
             'other_issue' => $request->other_issue,
